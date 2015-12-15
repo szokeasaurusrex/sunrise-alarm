@@ -18,7 +18,9 @@ void alarm() {
       delay(1);
     }
   }
-  light_state = "on";
+  if (!(stop_alarm)) {
+    light_state = "on";
+  }
 }
 
 boolean serialEvent() {
@@ -32,10 +34,13 @@ boolean serialEvent() {
     light_state = "off";
   } else if (serial_data == "a" && light_state == "off") {
     light_state = "alarm";
+    
+  Serial.println(light_state);Serial.println(light_state);
     alarm();
   } else {
     return false;
   }
+  Serial.println(light_state);
   return true;
 }
 

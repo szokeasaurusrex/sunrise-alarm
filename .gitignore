@@ -1,2 +1,3 @@
 server/web-interface/bootstrap
 server/web-interface/jquery.js
+server/web-interface/angular.min.js
