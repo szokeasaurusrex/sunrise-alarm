@@ -19,16 +19,35 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 well" ng-controller="alarms">
-      Lorem ipsum
+    <div class = "container" ng-controller="alarm-cont">
+      <div class="container col-md-6" ng-repeat="alarm in alarms">
+        <div class="well">
+          <div class="container">
+            <h2>{{ stringifyTime(alarm.hours, alarm.minutes) }}</h2>
+            <p>
+              {{ stringifyDays(alarm.days) }}
+            </p>
+            <button type="button" class="btn btn-primary btn-sm">
+              <h4>Edit alarm</h4>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     </footer>
+
+    <!-- Libraries -->
     <script src="jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="angular.min.js"></script>
+
+    <!-- Functions -->
+
+    <!-- Angular stuff -->
     <script>
       var app = angular.module("alarmApp", []);
     </script>
     <script src="js/lightStatus.js"></script>
+    <script src="js/alarms.js"></script>
   </body>
 </html>
