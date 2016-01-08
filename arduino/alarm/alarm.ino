@@ -26,6 +26,9 @@ void alarm() {
 boolean serialEvent() {
   String serial_data = Serial.readString();
   Serial.flush();
+  if (serial_data == "i") {
+    Serial.println(light_state);
+  }
   if (light_state != "on" && serial_data == "o") {
     analogWrite(gate_pin, 255);
     light_state = "on";
@@ -34,13 +37,10 @@ boolean serialEvent() {
     light_state = "off";
   } else if (serial_data == "a" && light_state == "off") {
     light_state = "alarm";
-    
-  Serial.println(light_state);Serial.println(light_state);
     alarm();
   } else {
     return false;
   }
-  Serial.println(light_state);
   return true;
 }
 
