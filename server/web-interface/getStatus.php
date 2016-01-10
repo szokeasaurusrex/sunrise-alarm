@@ -1,3 +1,3 @@
 <?php
-  echo exec("getStatus.py");
+  echo exec("getState.py");
 ?>
