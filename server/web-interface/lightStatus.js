@@ -2,10 +2,10 @@ app.controller("lightStatus", function($scope) {
   $scope.status = "off";
   $scope.status_confirmed = false;
   $scope.updateButton = function() {
-    if ($scope.status == "off") {
-      $scope.btn_action = "on";
-    } else {
+    if ($scope.status == "on") {
       $scope.btn_action = "off";
+    } else {
+      $scope.btn_action = "on";
     }
   };
   $scope.toggle = function() {
