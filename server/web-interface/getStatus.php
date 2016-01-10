@@ -1,3 +1,3 @@
 <?php
-  echo exec("getState.py");
+  echo exec("/home/dani/sunrise-alarm/server/python/getState.py");
 ?>
