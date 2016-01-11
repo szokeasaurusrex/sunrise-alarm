@@ -11,11 +11,20 @@ app.controller("lightStatus", function($scope) {
   $scope.toggle = function() {
     if ($scope.status_confirmed) {
       if ($scope.status == "off") {
-        $scope.status = "on";
+        var new_status = "on";
       } else {
-        $scope.status = "off";
+        var new_status = "off"
       }
-      $scope.updateButton($scope.status);
+      $scope.status_confirmed = false;
+      $.get("toggle.php", {new_status: new_status}, function(response) {
+        if (response == "OK") {
+          $scope.status = new_status;
+          $scope.updateButton();
+          $scope.status_confirmed = true;
+        } else {
+          alert("FAIL " + response);
+        }
+      });
     }
   };
   $scope.getStatus = function () {
