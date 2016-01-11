@@ -27,5 +27,5 @@ app.controller("lightStatus", function($scope) {
     }, "string")
   };
   $scope.updateButton();
-  $scope.getStatus;
+  $scope.getStatus();
 });
