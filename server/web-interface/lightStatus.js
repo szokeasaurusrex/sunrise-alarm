@@ -25,7 +25,7 @@ app.controller("lightStatus", function($scope) {
       $scope.status_confirmed = true;
       $scope.updateButton();
       $scope.$apply();
-    }, "string");
+    });
   };
   $scope.updateButton();
   $scope.getStatus();
