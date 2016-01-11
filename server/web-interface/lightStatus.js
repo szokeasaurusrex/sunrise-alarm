@@ -13,7 +13,7 @@ app.controller("lightStatus", function($scope) {
       $scope.status_confirmed = false;
       $.get("toggle.php", {new_status: $scope.btn_action}, function(response) {
         if (response == "OK") {
-          $scope.status = new_status;
+          $scope.status = $scope.btn_action;
           $scope.updateButton();
           $scope.status_confirmed = true;
         } else {
