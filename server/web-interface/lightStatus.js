@@ -16,6 +16,7 @@ app.controller("lightStatus", function($scope) {
           $scope.status = $scope.btn_action;
           $scope.updateButton();
           $scope.status_confirmed = true;
+          $scope.$apply();
         } else {
           alert("FAIL " + response);
         }
