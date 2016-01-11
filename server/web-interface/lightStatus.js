@@ -1,8 +1,8 @@
 app.controller("lightStatus", function($scope) {
   $scope.status = "off";
   $scope.status_confirmed = false;
-  $scope.updateButton = function() {
-    if ($scope.status == "on") {
+  $scope.updateButton = function(status) {
+    if (status == "on") {
       $scope.btn_action = "off";
     } else {
       $scope.btn_action = "on";
@@ -15,7 +15,7 @@ app.controller("lightStatus", function($scope) {
       } else {
         $scope.status = "off";
       }
-      $scope.updateButton();
+      $scope.updateButton($scope.status);
     }
   };
   $scope.getStatus = function () {
@@ -23,7 +23,7 @@ app.controller("lightStatus", function($scope) {
       console.log(response);
       $scope.status = response;
       $scope.status_confirmed = true;
-      $scope.updateButton();
+      $scope.updateButton(response);
       $scope.$apply();
     });
   };

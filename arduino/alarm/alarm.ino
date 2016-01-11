@@ -28,13 +28,14 @@ boolean serialEvent() {
   Serial.flush();
   if (serial_data == "i") {
     Serial.println(light_state);
-  }
-  if (light_state != "on" && serial_data == "o") {
+  } else if (light_state != "on" && serial_data == "o") {
     analogWrite(gate_pin, 255);
     light_state = "on";
+    Serial.println(light_state);
   } else if (serial_data == "o") {
     analogWrite(gate_pin, 0);
     light_state = "off";
+    Serial.println(light_state);
   } else if (serial_data == "a" && light_state == "off") {
     light_state = "alarm";
     alarm();
