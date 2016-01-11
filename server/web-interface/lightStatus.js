@@ -10,13 +10,8 @@ app.controller("lightStatus", function($scope) {
   };
   $scope.toggle = function() {
     if ($scope.status_confirmed) {
-      if ($scope.status == "off") {
-        var new_status = "on";
-      } else {
-        var new_status = "off"
-      }
       $scope.status_confirmed = false;
-      $.get("toggle.php", {new_status: new_status}, function(response) {
+      $.get("toggle.php", {new_status: $scope.btn_action}, function(response) {
         if (response == "OK") {
           $scope.status = new_status;
           $scope.updateButton();
