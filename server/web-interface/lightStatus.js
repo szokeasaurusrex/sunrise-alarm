@@ -19,13 +19,13 @@ app.controller("lightStatus", function($scope) {
     }
   };
   $scope.getStatus = function () {
-    $.get("getStatus.php", "", function (response) {
+    $.get("getStatus.php", function (response) {
       console.log(response);
       $scope.status = response;
       $scope.status_confirmed = true;
       $scope.updateButton();
       $scope.$apply();
-    }, "string")
+    }, "string");
   };
   $scope.updateButton();
   $scope.getStatus();
