@@ -19,7 +19,8 @@ app.controller("lightStatus", function($scope) {
     }
   };
   $scope.getStatus = function () {
-    $.get("getStatus.php", "", function (response) {
+    $.get("https://23.28.139.6/sunrise-alarm/getStatus.php", "", function (response) {
+      console.log(response);
       $scope.status = response;
       $scope.status_confirmed = true;
       $scope.updateButton();
