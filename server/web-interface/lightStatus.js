@@ -2,7 +2,7 @@ app.controller("lightStatus", function($scope) {
   $scope.status = "off";
   $scope.status_confirmed = false;
   $scope.updateButton = function(status) {
-    if (status == "on") {
+    if (status == "on" || status == "on ") {
       $scope.btn_action = "off";
     } else {
       $scope.btn_action = "on";
