@@ -20,5 +20,5 @@
       $alarms[] = $row;
     }
   }
-  echo json_encode($rows)
+  echo json_encode($rows);
 ?>
