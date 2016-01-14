@@ -2,7 +2,8 @@ app.controller("alarm-cont", function($scope) {
   function getAlarms() {
     .get("getAlarms.php", function(response) {
       $scope.alarms = response;
-    }, "json")
+      $scope.$apply();
+    }, "json");
   }
   $scope.stringifyTime = function(hours, minutes) {
     if (hours < 10) {
@@ -51,6 +52,11 @@ app.controller("alarm-cont", function($scope) {
     }
     return day_string;
   };
+  $scope.addAlarm = function() {
+    var alarm_id = $scope.alarms.push(new Alarm(0, 0, []);
+    $scope.alarms[alarm_id].editing = true;
+    $scope.$apply();
+  }
   getAlarms();
   // $scope.alarms = [
   //   {

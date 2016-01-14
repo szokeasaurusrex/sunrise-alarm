@@ -22,17 +22,63 @@
     <div class="container" ng-controller="alarm-cont">
       <div class="container col-md-6" ng-repeat="alarm in alarms">
         <div class="well">
-          <div class="container">
+          <div class="container" ng-hide="alarm.editing">
             <h2>{{ stringifyTime(alarm.hours, alarm.minutes) }}</h2>
             <p>
               {{ stringifyDays(alarm.days) }}
             </p>
-            <button type="button" class="btn btn-primary btn-sm">
+            <button type="button" class="btn btn-primary btn-sm" ng-click="alarm.edit()">
               <h4>Edit alarm</h4>
             </button>
+            <button type="button" class="btn btn-sm" ng-class="alarm.active ? 'btn-danger' : 'btn-success'">
+              <h4>Turn alarm {{ alarm.active ? "off" : "on" }}</h4>
+            </button>
+          </div>
+          <div class="container-fluid" ng-show="alarm.editing">
+            <form role="form">
+              <div class="form-group">
+                <div class="col-xs-6">
+                  <label for="hour">Alarm hour</label>
+                  <input class="form-control" ng-model="alarm.hour" id="hour" type="text">
+                </div>
+                <div class="col-xs-6">
+                  <label for="minute">Alarm minute</label>
+                  <input class="form-control" ng-model="alarm.minute" id="minute" type="text">
+                </div>
+              </div>
+              <div class="form-group container-fluid">
+                <label class="checkbox-inline">
+                  <input ng-model="alarm.days_tf[0]" type="checkbox">Monday
+                </label>
+                <label class="checkbox-inline">
+                  <input ng-model="alarm.days_tf[1]" type="checkbox">Tuesday
+                </label>
+                <label class="checkbox-inline">
+                  <input ng-model="alarm.days_tf[2]" type="checkbox">Wednesday
+                </label>
+                <label class="checkbox-inline">
+                  <input ng-model="alarm.days_tf[3]" type="checkbox">Thursday
+                </label>
+                <label class="checkbox-inline">
+                  <input ng-model="alarm.days_tf[4]" type="checkbox">Friday
+                </label>
+                <label class="checkbox-inline">
+                  <input ng-model="alarm.days_tf[5]" type="checkbox">Saturday
+                </label>
+                <label class="checkbox-inline">
+                  <input ng-model="alarm.days_tf[6]" type="checkbox">Sunday
+                </label>
+              </div>
+              <button type="button" class="btn btn-sm btn-success" ng-click="submit()">
+                <h4>Submit changes</h4>
+              </button>
+            </form>
           </div>
         </div>
       </div>
+      <button type="button" class="btn btn-success btn-lg btn-block" ng-click="addAlarm()">
+        <h2>Add alarm</h2>
+      </button>
     </div>
     </footer>
 
