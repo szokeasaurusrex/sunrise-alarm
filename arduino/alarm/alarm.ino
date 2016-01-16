@@ -1,29 +1,30 @@
 const int gate_pin = 5;
 String light_state;
 
-boolean serialEvent();
+void serialEvent();
 void alarm();
 
 void alarm() {
-  boolean stop_alarm = false;
+  boolean alarm_stopped = false;
   for (int i = 1; i < 256; i++) {
-    if (stop_alarm) {
+    if (light_state != "alarm") {
+      boolean alarm_stopped = true;
       break;
     }
     analogWrite(gate_pin, i);
-    for (int j = 0; j < 7059; j++) {
+    for (int j = 0; j < 100; j++) {
       if (Serial.available() > 0) {
-        stop_alarm = serialEvent();
+        serialEvent();
       }
       delay(1);
     }
   }
-  if (!(stop_alarm)) {
+  if (!(alarm_stopped)) {
     light_state = "on";
   }
 }
 
-boolean serialEvent() {
+void serialEvent() {
   String serial_data = Serial.readString();
   Serial.flush();
   if (serial_data == "i") {
@@ -39,10 +40,10 @@ boolean serialEvent() {
   } else if (serial_data == "a" && light_state == "off") {
     light_state = "alarm";
     alarm();
-  } else {
-    return false;
-  }
-  return true;
+  } //else {
+  //   return false;
+  // }
+  // return true;
 }
 
 void setup() {
