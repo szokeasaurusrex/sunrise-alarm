@@ -1,7 +1,7 @@
-function Alarm(hour, minute, days) {
-  this.hour = hour;
-  this.minute = minute;
-  this.days = days;
+function Alarm() {
+  this.hour = 0;
+  this.minute = 0;
+  this.days = [];
   this.active = true;
   this.editing = false;
   // this.applyEdits = function(hour, minute, days) {
@@ -31,12 +31,36 @@ function Alarm(hour, minute, days) {
     this.daysTf = [];
     var j = 0;
     for (var i = 0; i < 7; i++) {
-      if (this.days[j] === i) {
+      if (this.days[j - 1] === i) {
         this.daysTf[i] = true;
+        j++;
       } else {
         this.daysTf[i] = false;
       }
     }
-    return this.daysTf;
   };
+  this.updateDays = function () {
+    this.days = [];
+    for (var i = 0; i < 7; i++) {
+      if (this.daysTf[i] === true) {
+        this.days.push(i + 1);
+      }
+    }
+  }
+  this.edit = function() {
+    this.updateDaysTf();
+    this.oldAlarm = this;
+    this.editing = true;
+  };
+  this.saveEdits = function() {
+    this.editing = false;
+    this.updateDays();
+    $.post("saveAlarm.php", {type: "edit", alarm: JSON.stringify(this)}, function (response) {
+      if (response == "OK") {
+        alert("The alarm was successfully updated.");
+      } else {
+        alert("FAIL " + response);
+      }
+    });
+  }
 }).call(Alarm.prototype);

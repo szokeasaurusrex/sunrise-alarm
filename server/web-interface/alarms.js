@@ -1,6 +1,6 @@
 app.controller("alarm-cont", function($scope) {
   function getAlarms() {
-    .get("getAlarms.php", function(response) {
+    $.get("getAlarms.php", function(response) {
       $scope.alarms = response;
       $scope.$apply();
     }, "json");
@@ -53,7 +53,7 @@ app.controller("alarm-cont", function($scope) {
     return day_string;
   };
   $scope.addAlarm = function() {
-    var alarm_id = $scope.alarms.push(new Alarm(0, 0, []);
+    var alarm_id = $scope.alarms.push(new Alarm(0, 0, []));
     $scope.alarms[alarm_id].editing = true;
     $scope.$apply();
   }

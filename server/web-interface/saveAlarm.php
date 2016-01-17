@@ -1,4 +1,8 @@
 <?php
+  function filter(&$value) {
+    $value = htmlspecialchars($value);
+  }
+
   $servername = "localhost";
   $username = "sunrise_alarm";
   $password = "";
@@ -12,15 +16,9 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM alarms;";
-  $result = $conn->query($sql);
-  $alarms = array();
-  if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-      $alarms[] = $row;
-    }
-  } else {
-    $alarms = "none";
+  $post_data = $_POST;
+  array_walk_recursive($post_data, "filter")
+  if ($post_data["type"] == "toggle") {
+    
   }
-  echo json_encode($alarms);
 ?>
