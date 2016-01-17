@@ -1,8 +1,12 @@
 app.controller("alarm-cont", function($scope) {
   function getAlarms() {
     $.get("getAlarms.php", function(response) {
-      $scope.alarms = response;
-      console.log($scope.alarms);
+      var alarm_info = response;
+      $scope.alarms = [];
+      for (var i = 0; i < alarm_info.length; i++) {
+        var alarm = alarm_info[i];
+        $scope.alarms[i] = new Alarm(alarm.minute, alarm.hour, alarm.days);
+      }
       $scope.$apply();
     }, "json");
   }

@@ -17,7 +17,11 @@
   $alarms = array();
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-      $alarms[] = $row;
+      $alarms[] = array(
+        "minute" -> $row["minute"],
+        "hour" -> $row["hour"],
+        "days" -> $row["days"]
+      );
     }
   } else {
     $alarms = "none";

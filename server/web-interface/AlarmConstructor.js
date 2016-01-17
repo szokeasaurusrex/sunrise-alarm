@@ -1,7 +1,7 @@
-function Alarm() {
-  this.hour = 0;
-  this.minute = 0;
-  this.days = [];
+function Alarm(hour, minute, days) {
+  this.hour = hour;
+  this.minute = minute;
+  this.days = days;
   this.active = true;
   this.editing = false;
   // this.applyEdits = function(hour, minute, days) {
