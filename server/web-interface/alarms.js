@@ -2,6 +2,7 @@ app.controller("alarm-cont", function($scope) {
   function getAlarms() {
     $.get("getAlarms.php", function(response) {
       $scope.alarms = response;
+      console.log($scope.alarms);
       $scope.$apply();
     }, "json");
   }
