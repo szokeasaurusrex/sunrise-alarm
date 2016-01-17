@@ -18,9 +18,9 @@
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
       $alarms[] = array(
-        "minute" -> $row["minute"],
-        "hour" -> $row["hour"],
-        "days" -> $row["days"]
+        "minute" => $row["minute"],
+        "hour" => $row["hour"],
+        "days" => $row["days"]
       );
     }
   } else {
