@@ -55,11 +55,13 @@ function Alarm(hour, minute, days, active) {
       days: this.days
     };
     this.editing = true;
+    console.log(this);
   };
   this.saveEdits = function() {
     this.editing = false;
     this.updateDays();
     this.updateStartTime();
+    console.log(this)
     $.post("saveAlarm.php", {type: "edit", alarm: JSON.stringify(this)}, function (response) {
       if (response == "OK") {
         alert("The alarm was successfully updated.");
