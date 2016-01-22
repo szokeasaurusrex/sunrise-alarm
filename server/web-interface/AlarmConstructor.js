@@ -63,7 +63,7 @@ function Alarm(hour, minute, days, active) {
     this.updateDays();
     if (this.hour < 0 || this.hour > 23 || this.hour === NaN) {
       alert("Error. The alarm hour must be a number between 0 and 23.");
-    } else if (this.minute < 0 || this.minute > 59 || this.minute = NaN) {
+    } else if (this.minute < 0 || this.minute > 59 || this.minute === NaN) {
       alert("Error. The alarm minute must be a number between 0 and 59.");
     } else if (this.days == []) {
       alert("Error. No days were selected.");
