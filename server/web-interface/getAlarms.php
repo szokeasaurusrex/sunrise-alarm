@@ -17,6 +17,7 @@
   $alarms = array();
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
+      $days = unserialize($row["days"]);
       if ($row["active"] === 0) {
         $active = false;
       } else {
@@ -25,7 +26,7 @@
       $alarms[] = array(
         "minute" => $row["minute"],
         "hour" => $row["hour"],
-        "days" => $row["days"],
+        "days" => $days,
         "active" => $active
       );
     }
