@@ -28,21 +28,21 @@ function Alarm(hour, minute, days, active) {
     }
   };
   this.updateDaysTf = function () {
-    this.daysTf = [];
+    this.days_tf = [];
     var j = 0;
     for (var i = 0; i < 7; i++) {
       if (this.days[j] - 1 === i) {
-        this.daysTf[i] = true;
+        this.days_tf[i] = true;
         j++;
       } else {
-        this.daysTf[i] = false;
+        this.days_tf[i] = false;
       }
     }
   };
   this.updateDays = function () {
     this.days = [];
     for (var i = 0; i < 7; i++) {
-      if (this.daysTf[i] === true) {
+      if (this.days_tf[i] === true) {
         this.days.push(i + 1);
       }
     }
