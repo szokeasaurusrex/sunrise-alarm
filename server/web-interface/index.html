@@ -23,7 +23,7 @@
       <div class="container col-md-6" ng-repeat="alarm in alarms">
         <div class="well">
           <div class="container" ng-hide="alarm.editing">
-            <h2>{{ stringifyTime(alarm.hours, alarm.minutes) }}</h2>
+            <h2>{{ stringifyTime(alarm.hour, alarm.minute) }}</h2>
             <p>
               {{ stringifyDays(alarm.days) }}
             </p>

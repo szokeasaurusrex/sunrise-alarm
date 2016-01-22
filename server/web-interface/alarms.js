@@ -5,7 +5,7 @@ app.controller("alarm-cont", function($scope) {
       $scope.alarms = [];
       for (var i = 0; i < alarm_info.length; i++) {
         var alarm = alarm_info[i];
-        $scope.alarms[i] = new Alarm(alarm.minute, alarm.hour, alarm.days);
+        $scope.alarms[i] = new Alarm(alarm.minute, alarm.hour, alarm.days, alarm.active);
       }
       console.log($scope.alarms);
       $scope.$apply();
