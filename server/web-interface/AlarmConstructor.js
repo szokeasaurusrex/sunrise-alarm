@@ -31,7 +31,7 @@ function Alarm(hour, minute, days, active) {
     this.daysTf = [];
     var j = 0;
     for (var i = 0; i < 7; i++) {
-      if (this.days[j - 1] === i) {
+      if (this.days[j] - 1 === i) {
         this.daysTf[i] = true;
         j++;
       } else {
