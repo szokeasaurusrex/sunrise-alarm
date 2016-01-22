@@ -12,7 +12,7 @@ void alarm() {
       break;
     }
     analogWrite(gate_pin, i);
-    for (int j = 0; j < 100; j++) {
+    for (int j = 0; j < 7059; j++) {
       if (Serial.available() > 0) {
         serialEvent();
       }
