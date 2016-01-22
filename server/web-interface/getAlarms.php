@@ -17,10 +17,16 @@
   $alarms = array();
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
+      if ($row["active"] === 0) {
+        $active = false;
+      } else {
+        $active = true;
+      }
       $alarms[] = array(
         "minute" => $row["minute"],
         "hour" => $row["hour"],
-        "days" => $row["days"]
+        "days" => $row["days"],
+        "active" => $active
       );
     }
   } else {

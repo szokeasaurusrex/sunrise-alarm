@@ -1,8 +1,8 @@
-function Alarm(hour, minute, days) {
+function Alarm(hour, minute, days, active) {
   this.hour = hour;
   this.minute = minute;
   this.days = days;
-  this.active = true;
+  this.active = active;
   this.editing = false;
   // this.applyEdits = function(hour, minute, days) {
   //   this.editing = false;
@@ -55,6 +55,7 @@ function Alarm(hour, minute, days) {
   this.saveEdits = function() {
     this.editing = false;
     this.updateDays();
+    this.updateStartTime(this);
     $.post("saveAlarm.php", {type: "edit", alarm: JSON.stringify(this)}, function (response) {
       if (response == "OK") {
         alert("The alarm was successfully updated.");
