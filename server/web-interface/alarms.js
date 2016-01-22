@@ -7,6 +7,7 @@ app.controller("alarm-cont", function($scope) {
         var alarm = alarm_info[i];
         $scope.alarms[i] = new Alarm(alarm.minute, alarm.hour, alarm.days);
       }
+      console.log($scope.alarms);
       $scope.$apply();
     }, "json");
   }
