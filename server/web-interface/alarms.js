@@ -59,8 +59,8 @@ app.controller("alarm-cont", function($scope) {
     return day_string;
   };
   $scope.addAlarm = function() {
-    var alarm_id = $scope.alarms.push(new Alarm(0, 0, []));
-    $scope.alarms[alarm_id].editing = true;
+    var alarm_id = $scope.alarms.push(new Alarm(0, 0, [], true));
+    $scope.alarms[alarm_id].edit();
     $scope.$apply();
   }
   getAlarms();
