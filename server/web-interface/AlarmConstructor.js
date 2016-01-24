@@ -4,14 +4,6 @@ function Alarm(hour, minute, days, active) {
   this.days = days;
   this.active = active;
   this.editing = false;
-  // this.applyEdits = function(hour, minute, days) {
-  //   this.editing = false;
-  //   var oldAlarm = this;
-  //   this.time = genStartTime(hour, minute);
-  //   this.days = days;
-  //   pushChanges():
-  // };
-
 }
 (function() {
   this.toggle = function() {
@@ -69,6 +61,7 @@ function Alarm(hour, minute, days, active) {
       alert("Error. No days were selected.");
     } else {
       this.editing = false;
+      this.active = true;
       this.updateStartTime();
       console.log(this)
       $.post("saveAlarm.php", {type: "edit", alarm: JSON.stringify(this)}, function (response) {
@@ -79,5 +72,11 @@ function Alarm(hour, minute, days, active) {
         }
       });
     }
-  }
+  };
+  this.cancelEdits = function() {
+    this.editing = false;
+    this.hour = this.oldAlarm.hour;
+    this.minute = this.oldAlarm.minute;
+    this.days = this.oldAlarm.days;
+  };
 }).call(Alarm.prototype);
