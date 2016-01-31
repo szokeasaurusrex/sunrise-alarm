@@ -34,7 +34,7 @@
     $days = serialize($alarm["days"]);
     $sql = "UPDATE alarms
       SET active = $active
-      WHERE hour = $alarm[hour] AND minute = $alarm[minute] AND days = $days";
+      WHERE hour = $alarm[hour] AND minute = $alarm[minute] AND days = '$days'";
     if ($conn->query($sql) === false) {
       $success = "Error36 " . $conn->error . "\n" . $sql;
     }
@@ -77,7 +77,7 @@
             $days_string .= ",";
           }
         }
-        $crontab .= "$alarm[start_minute] $alarm[start_hour] * * $days_string $alarm_path\n";  
+        $crontab .= "$alarm[start_minute] $alarm[start_hour] * * $days_string $alarm_path\n";
       }
     }
     file_put_contents("/tmp/crontab", $crontab);
