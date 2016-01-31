@@ -31,24 +31,24 @@
     $days = serialize($alarm["days"]);
     $sql = "UPDATE alarms
       SET active = $active
-      WHERE hour = $alarm[\"hour\"] AND minute = $alarm[\"minute\"] AND days = $days";
+      WHERE hour = $alarm[hour] AND minute = $alarm[minute] AND days = $days";
     if ($conn->query($sql) === false) {
       $success = "Error " . $conn->error;
     }
   } else if ($edit_type == "edit" or $edit_type == "delete") {
     $old_days = serialize($old_alarm["days"]);
     $sql = "DELETE FROM alarms
-      WHERE hour = $old_alarm['hour'] AND minute = $old_alarm['minute'] AND days = $old_days";
+      WHERE hour = $old_alarm[\"hour\"] AND minute = $old_alarm[\"minute\"] AND days = $old_days";
     $conn->query($sql);
     if ($edit_type == "edit") {
       $days = serialize($alarm["days"]);
       $active = (int) $alarm["active"];
       $sql = "INSERT INTO alarms
         VALUES (
-          $alarm['hour'],
-          $alarm['minute'],
-          $alarm['start_hour'],
-          $alarm['start_minute'],
+          $alarm[hour],
+          $alarm[minute],
+          $alarm[start_hour],
+          $alarm[start_minute],
           $days,
           $active)";
       if ($conn->query($sql) === false) {
