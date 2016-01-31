@@ -19,7 +19,7 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $success = true;
+  $success = "OK";
   $post_data = $_POST;
   $edit_type = $post_data["type"];
   filter($edit_type);
@@ -81,5 +81,5 @@
     file_put_contents("/tmp/crontab", $crontab);
     exec("crontab /tmp/crontab");
   }
-  echo (string) $success . json_encode($old_alarm);
+  echo $success;
 ?>

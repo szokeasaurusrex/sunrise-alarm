@@ -84,7 +84,7 @@ function Alarm(hour, minute, days, active) {
   }
   this.pushChanges = function(type) {
     $.post("saveAlarm.php", {type: type, alarm: JSON.stringify(this)}, function (response) {
-      if (response == "true") {
+      if (response == "OK") {
         alert("The alarm was successfully updated.");
       } else {
         alert("FAIL " + response);
