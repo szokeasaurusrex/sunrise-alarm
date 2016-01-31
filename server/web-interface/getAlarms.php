@@ -18,7 +18,7 @@
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
       $days = unserialize($row["days"]);
-      if ($row["active"] === 0) {
+      if ($row["active"] == 0) {
         $active = false;
       } else {
         $active = true;
