@@ -24,9 +24,9 @@
   $edit_type = $post_data["type"];
   filter($edit_type);
   $alarm = (array) json_decode($post_data["alarm"]);
-  array_walk_recursive($alarm, "filter");
   $old_alarm = (array) $alarm["old_alarm"];
-  array_walk_recursive($old_alarm, "filter");
+  array_walk_recursive($alarm, "toInt");
+  array_walk_recursive($old_alarm, "toInt");
 
   if ($edit_type == "toggle") {
     $active = (int) $alarm["active"];
@@ -51,7 +51,7 @@
           $alarm[minute],
           $alarm[start_hour],
           $alarm[start_minute],
-          \"$days\",
+          $days,
           $active)";
       if ($conn->query($sql) === false) {
         $success = "Error55 " . $conn->error . "\n" . $sql;
