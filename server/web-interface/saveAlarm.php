@@ -33,7 +33,7 @@
       SET active = $active
       WHERE hour = $alarm[hour] AND minute = $alarm[minute] AND days = $days";
     if ($conn->query($sql) === false) {
-      $success = "Error36 " . $conn->error;
+      $success = "Error36 " . $conn->error . "\n" . $sql;
     }
   } else if ($edit_type == "edit" or $edit_type == "delete") {
     $old_days = serialize($old_alarm["days"]);
@@ -52,7 +52,7 @@
           $days,
           $active)";
       if ($conn->query($sql) === false) {
-        $success = "Error55 " . $conn->error;
+        $success = "Error55 " . $conn->error . "\n" . $sql;
       }
     }
   }
