@@ -51,7 +51,7 @@
           $alarm[minute],
           $alarm[start_hour],
           $alarm[start_minute],
-          $days,
+          \"$days\",
           $active)";
       if ($conn->query($sql) === false) {
         $success = "Error55 " . $conn->error . "\n" . $sql;
