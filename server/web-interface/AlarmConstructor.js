@@ -8,7 +8,7 @@ function Alarm(hour, minute, days, active) {
 (function() {
   this.toggle = function() {
     this.active = !(this.active);
-    pushChanges();
+    this.pushChanges("toggle");
   };
   this.updateStartTime = function() {
     if (this.minute < 30) {
@@ -63,14 +63,8 @@ function Alarm(hour, minute, days, active) {
       this.editing = false;
       this.active = true;
       this.updateStartTime();
-      console.log(this)
-      $.post("saveAlarm.php", {type: "edit", alarm: JSON.stringify(this)}, function (response) {
-        if (response == "OK") {
-          alert("The alarm was successfully updated.");
-        } else {
-          alert("FAIL " + response);
-        }
-      });
+      console.log(this);
+      this.pushChanges("edit");
     }
   };
   this.cancelEdits = function() {
@@ -79,4 +73,13 @@ function Alarm(hour, minute, days, active) {
     this.minute = this.oldAlarm.minute;
     this.days = this.oldAlarm.days;
   };
+  this.pushChanges = function(type) {
+    $.post("saveAlarm.php", {type: type, alarm: JSON.stringify(this)}, function (response) {
+      if (response == "true") {
+        alert("The alarm was successfully updated.");
+      } else {
+        alert("FAIL " + response);
+      }
+    });
+  }
 }).call(Alarm.prototype);
