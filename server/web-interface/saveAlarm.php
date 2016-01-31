@@ -25,6 +25,7 @@
   filter($edit_type);
   $alarm = (array) json_decode($post_data["alarm"]);
   $old_alarm = (array) $alarm["old_alarm"];
+  unset($alarm["old_alarm"]);
   array_walk_recursive($alarm, "toInt");
   array_walk_recursive($old_alarm, "toInt");
 
@@ -80,5 +81,5 @@
     file_put_contents("/tmp/crontab", $crontab);
     exec("crontab /tmp/crontab");
   }
-  echo (string) $success;
+  echo (string) $success . $old_alarm;
 ?>
