@@ -77,7 +77,7 @@
             $days_string .= ",";
           }
         }
-        $crontab .= "$row[start_minute] $row[start_hour] * * $days_string $alarm_path\n";
+        $crontab .= "$row[start_minute] $row[start_hour] * * $days_string $alarm_path" . PHP_EOL;
       }
     }
     file_put_contents("/tmp/crontab", $crontab);
