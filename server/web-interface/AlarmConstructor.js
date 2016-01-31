@@ -8,6 +8,7 @@ function Alarm(hour, minute, days, active) {
 (function() {
   this.toggle = function() {
     this.active = !(this.active);
+    console.log(this.active);
     this.pushChanges("toggle");
   };
   this.updateStartTime = function() {
