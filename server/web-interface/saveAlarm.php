@@ -66,17 +66,19 @@
   if ($result->num_rows > 0) {
     $crontab = "";
     while ($row = $result->fetch_assoc()) {
-      $days = unserialize($row["days"]);
-      array_walk($row, "toInt");
-      array_walk($days, "toInt");
-      $days_string = "";
-      for ($i = 0; $i < count($days); $i++) {
-        $days_string .= (string) $days[$i];
-        if ($i + 1 < count($days)) {
-          $days_string .= ",";
+      if ($row["active"]){
+        $days = unserialize($row["days"]);
+        array_walk($row, "toInt");
+        array_walk($days, "toInt");
+        $days_string = "";
+        for ($i = 0; $i < count($days); $i++) {
+          $days_string .= (string) $days[$i];
+          if ($i + 1 < count($days)) {
+            $days_string .= ",";
+          }
         }
+        $crontab .= "$alarm[start_minute] $alarm[start_hour] * * $days_string $alarm_path\n";  
       }
-      $crontab .= "$alarm[start_minute] $alarm[start_hour] * * $days_string $alarm_path\n";
     }
     file_put_contents("/tmp/crontab", $crontab);
     exec("crontab /tmp/crontab");
