@@ -62,7 +62,13 @@ app.controller("alarm-cont", function($scope) {
     var alarm_id = $scope.alarms.push(new Alarm(0, 0, [], true)) - 1;
     $scope.alarms[alarm_id].edit();
     $scope.$apply();
-  }
+  };
+  $scope.deleteAlarm = function(alarm) {
+    if (confirm("Press OK to delete this alarm.") === true) {
+      alarm = alarm.delete();
+      $scope.alarms.splice($scope.alarms.indexOf(alarm), 1);
+    }
+  };
   getAlarms();
   // $scope.alarms = [
   //   {

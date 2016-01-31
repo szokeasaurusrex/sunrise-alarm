@@ -33,7 +33,7 @@
             <button type="button" class="btn btn-sm" ng-class="alarm.active ? 'btn-warning' : 'btn-success'" ng-click="alarm.toggle()">
               <h4>Turn alarm {{ alarm.active ? "off" : "on" }}</h4>
             </button>
-            <button type="button" class="btn btn-sm btn-danger" ng-click="alarm.delete()">
+            <button type="button" class="btn btn-sm btn-danger" ng-click="deleteAlarm(alarm)">
               <h4>Delete alarm</h4>
             </button>
           </div>
