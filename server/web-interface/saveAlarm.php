@@ -81,5 +81,5 @@
     file_put_contents("/tmp/crontab", $crontab);
     exec("crontab /tmp/crontab");
   }
-  echo (string) $success . $old_alarm;
+  echo (string) $success . json_encode($old_alarm);
 ?>
