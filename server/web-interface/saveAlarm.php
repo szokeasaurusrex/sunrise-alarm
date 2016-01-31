@@ -31,7 +31,7 @@
     $days = serialize($alarm["days"]);
     $sql = "UPDATE alarms
       SET active = $active
-      WHERE hour = $alarm['hour'] AND minute = $alarm['minute'] AND days = $days";
+      WHERE hour = $alarm[\"hour\"] AND minute = $alarm[\"minute\"] AND days = $days";
     if ($conn->query($sql) === false) {
       $success = "Error " . $conn->error;
     }
