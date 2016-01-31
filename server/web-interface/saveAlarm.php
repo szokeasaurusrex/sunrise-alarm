@@ -38,7 +38,7 @@
   } else if ($edit_type == "edit" or $edit_type == "delete") {
     $old_days = serialize($old_alarm["days"]);
     $sql = "DELETE FROM alarms
-      WHERE hour = $old_alarm[\"hour\"] AND minute = $old_alarm[\"minute\"] AND days = $old_days";
+      WHERE hour = $old_alarm[hour] AND minute = $old_alarm[minute] AND days = $old_days";
     $conn->query($sql);
     if ($edit_type == "edit") {
       $days = serialize($alarm["days"]);
