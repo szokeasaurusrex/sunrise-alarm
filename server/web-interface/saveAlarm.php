@@ -21,9 +21,10 @@
 
   $success = true;
   $post_data = $_POST;
-  array_walk_recursive($post_data, "filter");
   $edit_type = $post_data["type"];
+  filter($edit_type);
   $alarm = json_decode($post_data["alarm"]);
+  array_walk_recursive($alarm, "filter")
   $old_alarm = $alarm["old_alarm"];
 
   if ($edit_type == "toggle") {
