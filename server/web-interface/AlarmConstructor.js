@@ -41,7 +41,7 @@ function Alarm(hour, minute, days, active) {
   }
   this.edit = function() {
     this.updateDaysTf();
-    this.oldAlarm = {
+    this.old_alarm = {
       hour: this.hour,
       minute: this.minute,
       days: this.days
