@@ -73,6 +73,16 @@ function Alarm(hour, minute, days, active) {
     this.minute = this.oldAlarm.minute;
     this.days = this.oldAlarm.days;
   };
+  this.delete = function() {
+    if (confirm("Are you sure you want to delete this alarm") === true) {
+      this.old_alarm = {
+        hour: this.hour,
+        minute: this.minute,
+        days: this.days
+      };
+      this.pushChanges("delete");
+    }
+  }
   this.pushChanges = function(type) {
     $.post("saveAlarm.php", {type: type, alarm: JSON.stringify(this)}, function (response) {
       if (response == "true") {

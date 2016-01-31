@@ -30,8 +30,11 @@
             <button type="button" class="btn btn-primary btn-sm" ng-click="alarm.edit()">
               <h4>Edit alarm</h4>
             </button>
-            <button type="button" class="btn btn-sm" ng-class="alarm.active ? 'btn-danger' : 'btn-success'" ng-click="alarm.toggle()">
+            <button type="button" class="btn btn-sm" ng-class="alarm.active ? 'btn-warning' : 'btn-success'" ng-click="alarm.toggle()">
               <h4>Turn alarm {{ alarm.active ? "off" : "on" }}</h4>
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" ng-click="alarm.delete()">
+              <h4>Delete alarm</h4>
             </button>
           </div>
           <div class="container-fluid" ng-show="alarm.editing">
