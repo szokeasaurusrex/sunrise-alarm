@@ -60,7 +60,7 @@
     }
   }
   exec("crontab -r");
-  $alarm_path = "/home/dani/sunrise-alarm/server/python/alarm.py";
+  $alarm_path = "/var/www/scripts/alarm.py";
   $sql = "SELECT * FROM alarms";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
