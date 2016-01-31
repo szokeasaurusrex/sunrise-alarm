@@ -25,7 +25,7 @@
   filter($edit_type);
   $alarm = json_decode($post_data["alarm"]);
   array_walk_recursive($alarm, "filter");
-  $old_alarm = $alarm["old_alarm"];
+  $old_alarm = (array) $alarm["old_alarm"];
 
   if ($edit_type == "toggle") {
     $active = (int) $alarm["active"];
