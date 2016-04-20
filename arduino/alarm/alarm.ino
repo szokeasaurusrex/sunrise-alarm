@@ -9,9 +9,10 @@ void alarm() {
   for (int i = 1; i < 256; i++) {
     if (light_state != "alarm") {
       boolean alarm_stopped = true;
-      break;
+      return;
     }
-    analogWrite(gate_pin, i);
+    int brightness = (int) pow(1.0219, (float) i);
+    analogWrite(gate_pin, brightness);
     for (int j = 0; j < 7059; j++) {
       if (Serial.available() > 0) {
         serialEvent();
