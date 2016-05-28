@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/python3
 import serial
 import sys
 port = serial.Serial('/dev/ttyACM0', 9600)
