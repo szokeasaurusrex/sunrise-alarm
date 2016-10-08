@@ -35,20 +35,20 @@
     $sql = $conn->prepare("UPDATE alarms
       SET active = ?
       WHERE hour = ? AND minute = ? AND days = ?");
-    $sql->bind_param("iiis", $active, $alarm[hour], $alarm[minute], $days);
+    $sql->bind_param("iiis", $active, $alarm["hour"], $alarm["minute"], $days);
     $sql->execute();
   } else if ($edit_type == "edit" or $edit_type == "delete") {
     $old_days = serialize($old_alarm["days"]);
     $sql = $conn->prepare("DELETE FROM alarms
       WHERE hour = ? AND minute = ? AND days = ?");
-    $sql->bind_param("iis", $old_alarm[hour], $old_alarm[minute], $old_alarm[days]);
+    $sql->bind_param("iis", $old_alarm["hour"], $old_alarm["minute"], $old_alarm["days"]);
     $sql->execute();
     if ($edit_type == "edit") {
       $days = serialize($alarm["days"]);
       $active = (int) $alarm["active"];
       $sql = $conn->prepare("INSERT INTO alarms
         VALUES (?, ?, ?, ?, ?, ?)");
-      $sql->bind_param("iiiisi", $alarm[hour], $alarm[minute], $alarm[start_hour],
+      $sql->bind_param("iiiisi", $alarm["hour"], $alarm["minute"], $alarm["start_hour"],
         $alarm[start_minute], $days, $active);
       $sql->execute();
     }
