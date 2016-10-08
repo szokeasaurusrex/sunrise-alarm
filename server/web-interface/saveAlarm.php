@@ -43,7 +43,7 @@
     $old_days = serialize($old_alarm["days"]);
     $sql = $conn->prepare("DELETE FROM alarms
       WHERE hour = ? AND minute = ? AND days = ?");
-    $sql->bind_param("iis", $old_alarm["hour"], $old_alarm["minute"], $old_alarm["days"]);
+    $sql->bind_param("iis", $old_alarm["hour"], $old_alarm["minute"], $old_days);
     if ($sql->execute() === false) {
       $success = "Error48 " . $conn->error . "\n" . $sql;
     }
