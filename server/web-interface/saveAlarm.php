@@ -32,31 +32,25 @@
   if ($edit_type == "toggle") {
     $active = (int) $alarm["active"];
     $days = serialize($alarm["days"]);
-    $sql = "UPDATE alarms
-      SET active = $active
-      WHERE hour = $alarm[hour] AND minute = $alarm[minute] AND days = '$days'";
-    if ($conn->query($sql) === false) {
-      $success = "Error36 " . $conn->error . "\n" . $sql;
-    }
+    $sql = $conn->prepare("UPDATE alarms
+      SET active = ?
+      WHERE hour = ? AND minute = ? AND days = ?");
+    $sql->bind_param("iiis", $active, $alarm[hour], $alarm[minute], $days);
+    $sql->execute();
   } else if ($edit_type == "edit" or $edit_type == "delete") {
     $old_days = serialize($old_alarm["days"]);
-    $sql = "DELETE FROM alarms
-      WHERE hour = $old_alarm[hour] AND minute = $old_alarm[minute] AND days = '$old_days'";
-    $conn->query($sql);
+    $sql = conn->prepare("DELETE FROM alarms
+      WHERE hour = ? AND minute = ? AND days = ?");
+    $sql->bind_param("iis", $old_alarm[hour], $old_alarm[minute], $old_alarm[days]);
+    $sql->execute();
     if ($edit_type == "edit") {
       $days = serialize($alarm["days"]);
       $active = (int) $alarm["active"];
       $sql = "INSERT INTO alarms
-        VALUES (
-          $alarm[hour],
-          $alarm[minute],
-          $alarm[start_hour],
-          $alarm[start_minute],
-          '$days',
-          $active)";
-      if ($conn->query($sql) === false) {
-        $success = "Error55 " . $conn->error . "\n" . $sql;
-      }
+        VALUES (?, ?, ?, ?, ?, ?)";
+      $sql->bind_param("iiiisi", $alarm_hour, $alarm[minute], $alarm[start_hour],
+        $alarm[start_minute], $days, $active);
+      $sql->execute();
     }
   }
   exec("crontab -r");
