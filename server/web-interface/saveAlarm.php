@@ -24,7 +24,7 @@
   $edit_type = $post_data["type"];
   filter($edit_type);
   $alarm = (array) json_decode($post_data["alarm"]);
-  $old_alarm = (array) $alarm["old_alarm"];
+  $old_alarm = $alarm["old_alarm"];
   unset($alarm["old_alarm"]);
   array_walk_recursive($alarm, "toInt");
   array_walk_recursive($old_alarm, "toInt");
