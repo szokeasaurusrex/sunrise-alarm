@@ -49,7 +49,7 @@
       $sql = $conn->prepare("INSERT INTO alarms
         VALUES (?, ?, ?, ?, ?, ?)");
       $sql->bind_param("iiiisi", $alarm["hour"], $alarm["minute"], $alarm["start_hour"],
-        $alarm[start_minute], $days, $active);
+        $alarm["start_minute"], $days, $active);
       $sql->execute();
     }
   }
