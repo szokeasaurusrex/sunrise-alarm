@@ -70,16 +70,4 @@ app.controller("alarm-cont", function($scope) {
     }
   };
   getAlarms();
-  // $scope.alarms = [
-  //   {
-  //     hours: 7,
-  //     minutes: 0,
-  //     days: [1, 2, 3, 4, 5]
-  //   },
-  //   {
-  //     hours: 5,
-  //     minutes: 30,
-  //     days: [6,7]
-  //   }
-  // ];
 });
