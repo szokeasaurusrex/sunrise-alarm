@@ -2,7 +2,7 @@ var app = angular.module("adminApp", []);
 app.controller("admin", function($scope) {
   function main() {
     if (localStorage.authkey) {
-      var authkey = JSON.parse(localStorage.authkey);
+      $scope.authkey = JSON.parse(localStorage.authkey);
     } else {
       var name = "";
       while (name == "") {
@@ -11,7 +11,7 @@ app.controller("admin", function($scope) {
       while (name.length > 50) {
         name = prompt("Error: Name must be 50 characters or less. Please enter a different name");
       }
-      var authkey = {
+      $scope.authkey = {
         name: name,
         key: ""
       };
@@ -21,7 +21,7 @@ app.controller("admin", function($scope) {
 
 // response object contains msg and device_info
 // device_info is array if msg "OK", if "newdevice" it is an object for one device
-    $.post("getDevices.php", authkey, function(response) {
+    $.post("getDevices.php", $scope.authkey, function(response) {
       if (response.msg == "OK") {
         $scope.authorized = true;
         $scope.devices = [];
@@ -39,7 +39,8 @@ app.controller("admin", function($scope) {
         main();
       } else if (response.msg == "newdevice") {
         $scope.authorized = false;
-        localStorage.authkey = JSON.stringify(response.device_info)
+        $scope.authkey = response.device_info;
+        localStorage.authkey = JSON.stringify($scope.authkey);
       } else if (response.msg == "duplicatename") {
         alert("Sorry. The device name you picked exists in the database already. Pick another one.");
         main();
@@ -49,5 +50,25 @@ app.controller("admin", function($scope) {
       $scope.$apply();
     }, "json");
   }
+
+  $scope.approve = function(index) {
+    var confirmation = prompt("Are you sure you want to approve " + $scope.devices[index].name + "?");
+    if (confirmation) {
+      data = {
+        authkey: $scope.authkey,
+        device: $scope.devices[index].name
+      }
+      $.post("approveDevice.php", data, function(response) {
+        if (response == "OK") {
+          $scope.devices[index].authorized = true;
+          $scope.$apply();
+          alert("Success!");
+        } else {
+          alert(response);
+        }
+      }, "text");
+    }
+  }
+
   main();
 });
