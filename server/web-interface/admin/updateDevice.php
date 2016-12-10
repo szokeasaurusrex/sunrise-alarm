@@ -20,9 +20,9 @@
   filter($device_name);
 
   if (authenticate($conn, $access_key) > 0) {
-    if ($action = "approve") {
+    if ($action == "approve") {
       $sql = $conn->prepare("UPDATE devices SET approved = 1 WHERE name = ?");
-    } else if ($action = "delete") {
+    } else if ($action == "delete") {
       $sql = $conn->prepare("DELETE FROM devices WHERE name = ?");
     }
     $sql->bind_param("s", $device_name);
