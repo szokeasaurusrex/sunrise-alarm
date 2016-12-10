@@ -18,7 +18,7 @@
 
   $device_info = array();
 
-  if ($key == "") {
+  if ($access_key["key"] == "") {
     $device_name = $access_key["name"];
     filter($device_name);
     $bytes = openssl_random_pseudo_bytes(64, $cstrong);
