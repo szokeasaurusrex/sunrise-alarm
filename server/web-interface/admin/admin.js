@@ -44,4 +44,5 @@ app.controller("admin", function($scope) {
       $scope.$apply();
     });
   }
+  main();
 });
