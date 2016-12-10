@@ -17,7 +17,7 @@ app.controller("admin", function($scope) {
       };
     }
     $scope.authorized = false;
-    $scope.device_name = name;
+    $scope.device_name = authkey.name;
 
 // response object contains msg and device_info
 // device_info is array if msg "OK", if "newdevice" it is an object for one device
@@ -38,7 +38,7 @@ app.controller("admin", function($scope) {
       } else if (response.msg == "duplicatename") {
         alert("Sorry. The device name you picked exists in the database already. Pick another one.");
         main();
-      } else {
+      } else if (response.msg != "unauthorized") {
         alert(response.msg);
       }
       $scope.$apply();
