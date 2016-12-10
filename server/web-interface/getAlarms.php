@@ -1,4 +1,6 @@
 <?php
+  require "authenticate.php";
+
   $servername = "localhost";
   $username = "sunrise_alarm";
   $password = "";
@@ -12,26 +14,30 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM alarms;";
-  $result = $conn->query($sql);
+  $access_key = $_POST;
+
   $alarms = array();
-  if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-      $days = unserialize($row["days"]);
-      if ($row["active"] == 0) {
-        $active = false;
-      } else {
-        $active = true;
+
+  if (authenticate($conn, $access_key) > 0)  {
+    $sql = "SELECT * FROM alarms;";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        $days = unserialize($row["days"]);
+        if ($row["active"] == 0) {
+          $active = false;
+        } else {
+          $active = true;
+        }
+        $alarms[] = array(
+          "minute" => $row["minute"],
+          "hour" => $row["hour"],
+          "days" => $days,
+          "active" => $active
+        );
       }
-      $alarms[] = array(
-        "minute" => $row["minute"],
-        "hour" => $row["hour"],
-        "days" => $days,
-        "active" => $active
-      );
     }
-  } else {
-    $alarms = "none";
   }
+
   echo json_encode($alarms);
 ?>
