@@ -52,7 +52,7 @@ app.controller("admin", function($scope) {
   }
 
   $scope.approve = function(index) {
-    var confirmation = prompt("Are you sure you want to approve " + $scope.devices[index].name + "?");
+    var confirmation = confirm("Are you sure you want to approve " + $scope.devices[index].name + "?");
     if (confirmation) {
       data = {
         authkey: $scope.authkey,
