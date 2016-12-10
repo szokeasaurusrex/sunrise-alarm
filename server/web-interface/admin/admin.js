@@ -26,7 +26,7 @@ app.controller("admin", function($scope) {
         $scope.authorized = true;
         $scope.devices = [];
         for (var i = 0; i < response.device_info.length; i++) {
-          $scope.devices[i] = new Device(response.device_info[i].name, response.device_info[i].authorized, $scope.device_name);
+          $scope.devices.push(new Device(response.device_info[i].name, response.device_info[i].authorized, $scope.device_name));
         }
       } else if (response.msg == "nodevice") {
         alert("This device no longer exists in the database.");
