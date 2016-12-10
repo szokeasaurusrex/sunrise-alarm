@@ -73,4 +73,6 @@
     "msg" => $msg,
     "device_info" => $device_info
   );
+
+  echo $response;
 ?>
