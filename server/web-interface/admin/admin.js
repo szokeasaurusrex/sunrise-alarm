@@ -21,7 +21,7 @@ app.controller("admin", function($scope) {
 
 // response object contains msg and device_info
 // device_info is array if msg "OK", if "newdevice" it is an object for one device
-    $.getJSON("getDevices.php", authkey, function(response) {
+    $.post("getDevices.php", authkey, function(response) {
       if (response.msg == "OK") {
         $scope.authorized = true;
         $scope.devices = [];
@@ -42,7 +42,7 @@ app.controller("admin", function($scope) {
         alert(response.msg);
       }
       $scope.$apply();
-    });
+    }, "json");
   }
   main();
 });
