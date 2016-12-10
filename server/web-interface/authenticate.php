@@ -6,7 +6,7 @@
     $result = $sql->get_result();
     if ($result->num_rows == 1) {
       $device = $result->fetch_assoc();
-      if ($device["approved"] && password_verify($password, $device["hash"])) {
+      if ($device["approved"] == 1 && password_verify($password, $device["hash"])) {
         return true;
       } else {
         return false;
