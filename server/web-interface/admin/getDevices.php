@@ -35,7 +35,7 @@
       $sql->bind_param("s", $device_name);
       $sql->execute();
       $result = $sql->get_result();
-      if ($result->num_rows() == 0) {
+      if ($result->num_rows == 0) {
         $key = bin2hex($bytes);
         $hash = password_hash($key, PASSWORD_DEFAULT);
         $sql = $conn->prepare("INSERT INTO devices VALUES (?, ?, ?)");
