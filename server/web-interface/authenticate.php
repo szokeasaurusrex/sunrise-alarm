@@ -1,6 +1,13 @@
 <?php
+  function filter(&$value) {
+    $value = htmlspecialchars($value);
+  }
+
   // returns 1 if authorized, 0 if not, -1 if device not found
-  function authenticate($conn, $device_name, $password) {
+  function authenticate($conn, $access_key) {
+    $device_name = $access_key["name"];
+    $password = $access_key["key"];
+    filter($device_name);
     $sql = $conn->prepare("SELECT * FROM devices WHERE name = ?");
     $sql->bind_param("s", $device_name);
     $sql->execute();

@@ -1,10 +1,6 @@
 <?php
   require "../authenticate.php";
 
-  function filter(&$value) {
-    $value = htmlspecialchars($value);
-  }
-
   $servername = "localhost";
   $username = "sunrise_alarm";
   $password = "";
@@ -18,13 +14,13 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $device_name = $_POST["name"];
-  $key = $_POST["key"];
-  filter($device_name);
+  $access_key = $_POST;
 
   $device_info = array();
 
   if ($key == "") {
+    $device_name = $access_key["name"];
+    filter($device_name);
     $bytes = openssl_random_pseudo_bytes(64, $cstrong);
     if ($cstrong == false) {
       $msg = "Error generating key. Not cryptographically secure.";
@@ -51,7 +47,7 @@
       }
     }
   } else {
-    $authorization = authenticate($conn, $device_name, $key);
+    $authorization = authenticate($conn, $access_key);
     if ($authorization > 0) {
       $sql = "SELECT * FROM devices";
       $result = $conn->query($sql);

@@ -55,8 +55,8 @@
               {{ device.authorized ? "Authorized" : "Unauthorized" }}
             </td>
             <td>
-              <button class="btn btn-success" ng-click="device.approve()" ng-hide="device.authorized">Approve</button>
-              <button class="btn btn-danger" ng-click="device.delete()" ng-hide="device.current">Delete</button>
+              <button class="btn btn-success" ng-click="approve($index)" ng-hide="device.authorized">Approve</button>
+              <button class="btn btn-danger" ng-click="delete($index)" ng-hide="device.current">Delete</button>
             </td>
           </tr>
         </tbody>
