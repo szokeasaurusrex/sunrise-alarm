@@ -74,5 +74,5 @@
     "device_info" => $device_info
   );
 
-  echo $response;
+  echo json_encode($response);
 ?>
