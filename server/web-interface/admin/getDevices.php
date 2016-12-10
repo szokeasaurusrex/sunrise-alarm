@@ -25,7 +25,7 @@
   $device_info = array();
 
   if ($key == "") {
-    $bytes = openssl_randoem_pseudo_bytes(64, $cstrong);
+    $bytes = openssl_random_pseudo_bytes(64, $cstrong);
     if ($cstrong == false) {
       $msg = "Error generating key. Not cryptographically secure.";
     } else if ($bytes == false) {
