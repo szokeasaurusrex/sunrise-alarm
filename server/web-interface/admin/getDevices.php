@@ -57,8 +57,8 @@
       $result = $conn->query($sql);
       while ($row = $result->fetch_assoc()) {
         $device_info[] = array(
-          "name" => $result["name"],
-          "authorized" => $result["approved"]
+          "name" => $row["name"],
+          "authorized" => $row["approved"]
         );
       }
       $msg = "OK";
