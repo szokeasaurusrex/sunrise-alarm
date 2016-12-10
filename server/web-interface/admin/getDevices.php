@@ -1,5 +1,5 @@
 <?php
-  require dirname(__DIR__)."/../authenticate.php";
+  require "../authenticate.php";
 
   function filter(&$value) {
     $value = htmlspecialchars($value);
