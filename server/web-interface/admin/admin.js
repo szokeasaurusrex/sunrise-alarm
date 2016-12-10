@@ -1,3 +1,4 @@
+var app = angular.module("adminApp", []);
 app.controller("admin", function($scope) {
   function main() {
     if (localStorage.authkey) {
