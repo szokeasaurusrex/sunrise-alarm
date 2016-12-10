@@ -46,7 +46,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-loop="device in devices" ng-class="{'currentDevice': device.current}">
+        <tr ng-repeat="device in devices" ng-class="{'currentDevice': device.current}">
           <td>
             {{ device.name }}
           </td>
@@ -54,7 +54,7 @@
             {{ device.authorized ? "Authorized" : "Unauthorized" }}
           </td>
           <td>
-            <button class="btn btn-success" ng-click="device.approve()" ng-hide="device.approved">Approve</button>
+            <button class="btn btn-success" ng-click="device.approve()" ng-hide="device.authorized">Approve</button>
             <button class="btn btn-danger" ng-click="device.delete()" ng-hide="device.current">Delete</button>
           </td>
         </tr>
