@@ -1,5 +1,5 @@
 <?php
-  require "../authenticate.php";
+  require "authenticate.php";
 
   $servername = "localhost";
   $username = "sunrise_alarm";

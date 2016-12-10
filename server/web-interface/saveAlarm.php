@@ -1,4 +1,6 @@
 <?php
+  require "authenticate.php";
+  
   function filter(&$value) {
     $value = htmlspecialchars($value);
   }
