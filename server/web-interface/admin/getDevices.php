@@ -32,7 +32,7 @@
       $msg = "Error generating key.";
     } else {
       $sql = $conn->prepare("SELECT * FROM devices WHERE name = ?");
-      $sql = $conn->bind_param("s", $device_name);
+      $sql->bind_param("s", $device_name);
       $sql->execute();
       $result = $sql->get_result();
       if ($result->num_rows() == 0) {
