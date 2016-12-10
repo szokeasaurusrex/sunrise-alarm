@@ -58,7 +58,7 @@ app.controller("admin", function($scope) {
         authkey: $scope.authkey,
         device: $scope.devices[index].name,
         action: "approve"
-      }
+      };
       $.post("updateDevice.php", data, function(response) {
         if (response == "OK") {
           $scope.devices[index].authorized = true;
@@ -78,7 +78,7 @@ app.controller("admin", function($scope) {
         authkey: $scope.authkey,
         device: $scope.devices[index].name,
         action: "delete"
-      }
+      };
       $.post("updateDevice.php", data, function(response) {
         if (response == "OK") {
           $scope.devices.splice(index, 1);
@@ -88,6 +88,7 @@ app.controller("admin", function($scope) {
           alert(response);
         }
       }, "text");
+    }
   };
 
   main();
