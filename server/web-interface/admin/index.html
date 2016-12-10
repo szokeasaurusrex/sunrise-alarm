@@ -28,38 +28,40 @@
     <meta name="theme-color" content="#ffffff">
   </head>
   <body ng-controller="admin">
-    <h1>Sunrise Alarm Admin Panel</h1>
-    <h2>This device is {{ authorized ? "authorized" : "unauthorized" }}</h2>
-    <h3>{{ device_name }}</h3>
-    <table class="table" ng-show="authorized">
-      <thead>
-        <tr>
-          <th>
-            Device Name
-          </th>
-          <th>
-            Status
-          </th>
-          <th>
-            Actions
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="device in devices" ng-class="{'currentDevice': device.current}">
-          <td>
-            {{ device.name }}
-          </td>
-          <td>
-            {{ device.authorized ? "Authorized" : "Unauthorized" }}
-          </td>
-          <td>
-            <button class="btn btn-success" ng-click="device.approve()" ng-hide="device.authorized">Approve</button>
-            <button class="btn btn-danger" ng-click="device.delete()" ng-hide="device.current">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="container">
+      <h1>Sunrise Alarm Admin Panel</h1>
+      <h2>This device is {{ authorized ? "authorized" : "unauthorized" }}</h2>
+      <h3>{{ device_name }}</h3>
+      <table class="table" ng-show="authorized">
+        <thead>
+          <tr>
+            <th>
+              Device Name
+            </th>
+            <th>
+              Status
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="device in devices" ng-class="{'currentDevice': device.current}">
+            <td>
+              {{ device.name }}
+            </td>
+            <td>
+              {{ device.authorized ? "Authorized" : "Unauthorized" }}
+            </td>
+            <td>
+              <button class="btn btn-success" ng-click="device.approve()" ng-hide="device.authorized">Approve</button>
+              <button class="btn btn-danger" ng-click="device.delete()" ng-hide="device.current">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <script src="../jquery.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
