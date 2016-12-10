@@ -18,7 +18,7 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $device_name = $_POST["device"];
+  $device_name = $_POST["name"];
   $key = $_POST["key"];
   filter($device_name);
 

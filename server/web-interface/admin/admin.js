@@ -12,7 +12,7 @@ app.controller("admin", function($scope) {
         name = prompt("Error: Name must be 50 characters or less. Please enter a different name");
       }
       var authkey = {
-        device: name,
+        name: name,
         key: ""
       };
     }
