@@ -36,7 +36,7 @@ app.controller("admin", function($scope) {
         localStorage.authkey = JSON.stringify(response.device_info)
       } else if (response.msg == "duplicatename") {
         alert("Sorry. The device name you picked exists in the database already. Pick another one.");
-        main()
+        main();
       } else {
         alert(response.msg);
       }
