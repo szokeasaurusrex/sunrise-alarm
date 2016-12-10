@@ -42,8 +42,8 @@
         $sql->bind_param("ssi", $device_name, $hash, 0);
         $sql->execute();
         $device_info = array(
-          "name" => $device_name;
-          "key" => $key;
+          "name" => $device_name,
+          "key" => $key
         );
         $msg = "newdevice";
       } else {
