@@ -23,7 +23,7 @@
     if ($action = "approve") {
       $sql = $conn->prepare("UPDATE devices SET approved = 1 WHERE name = ?");
     } else if ($action = "delete") {
-      $sql = $conn->prepare("DELETE FROM devices WHERE name = ?")
+      $sql = $conn->prepare("DELETE FROM devices WHERE name = ?");
     }
     $sql->bind_param("s", $device_name);
     if ($sql->execute() === false) {
