@@ -1,0 +1,72 @@
+<html lang="en" ng-app="adminApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sunrise Alarm</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css.css">
+    <!--icons-->
+    <link rel="apple-touch-icon" sizes="57x57" href="/sunrise-alarm/icons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/sunrise-alarm/icons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/sunrise-alarm/icons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/sunrise-alarm/icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/sunrise-alarm/icons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/sunrise-alarm/icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/sunrise-alarm/icons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/sunrise-alarm/icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/sunrise-alarm/icons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/sunrise-alarm/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/sunrise-alarm/icons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/sunrise-alarm/icons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/sunrise-alarm/icons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/sunrise-alarm/icons/manifest.json">
+    <link rel="mask-icon" href="/sunrise-alarm/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/sunrise-alarm/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/sunrise-alarm/icons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/sunrise-alarm/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+  <body ng-controller="admin">
+    <div class="container">
+      <h1>Sunrise Alarm Admin Panel</h1>
+      <h2>This device is {{ authorized ? "authorized" : "unauthorized" }}</h2>
+      <h3>{{ device_name }}</h3>
+      <table class="table" ng-show="authorized">
+        <thead>
+          <tr>
+            <th>
+              Device Name
+            </th>
+            <th>
+              Status
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="device in devices" ng-class="{'currentDevice': device.current}">
+            <td>
+              {{ device.name }}
+            </td>
+            <td>
+              {{ device.authorized ? "Authorized" : "Unauthorized" }}
+            </td>
+            <td>
+              <button class="btn btn-success" ng-click="approve($index)" ng-hide="device.authorized">Approve</button>
+              <button class="btn btn-danger" ng-click="delete($index)" ng-hide="device.current">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="../jquery.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../angular.min.js"></script>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
