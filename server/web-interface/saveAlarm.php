@@ -1,9 +1,6 @@
 <?php
   require "authenticate.php";
-  
-  function filter(&$value) {
-    $value = htmlspecialchars($value);
-  }
+
   function toInt(&$value) {
     $value = (int) $value;
   }
