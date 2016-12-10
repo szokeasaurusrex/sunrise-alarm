@@ -56,9 +56,10 @@ app.controller("admin", function($scope) {
     if (confirmation) {
       data = {
         authkey: $scope.authkey,
-        device: $scope.devices[index].name
+        device: $scope.devices[index].name,
+        action: "approve"
       }
-      $.post("approveDevice.php", data, function(response) {
+      $.post("updateDevice.php", data, function(response) {
         if (response == "OK") {
           $scope.devices[index].authorized = true;
           $scope.$apply();
@@ -68,7 +69,26 @@ app.controller("admin", function($scope) {
         }
       }, "text");
     }
-  }
+  };
+
+  $scope.delete = function(index) {
+    var confirmation = confirm("Are you sure you want to delete " + $scope.devices[index].name + "?");
+    if (confirmation) {
+      data = {
+        authkey: $scope.authkey,
+        device: $scope.devices[index].name,
+        action: "delete"
+      }
+      $.post("updateDevice.php", data, function(response) {
+        if (response == "OK") {
+          $scope.devices.splice(index, 1);
+          $scope.$apply();
+          alert("Success!");
+        } else {
+          alert(response);
+        }
+      }, "text");
+  };
 
   main();
 });

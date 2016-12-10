@@ -16,13 +16,18 @@
 
   $access_key = $_POST["authkey"];
   $device_name = $_POST["device"];
+  $action = $_POST["action"];
   filter($device_name);
 
   if (authenticate($conn, $access_key) > 0) {
-    $sql = $conn->prepare("UPDATE devices SET approved = 1 WHERE name = ?");
+    if ($action = "approve") {
+      $sql = $conn->prepare("UPDATE devices SET approved = 1 WHERE name = ?");
+    } else if ($action = "delete") {
+      $sql = $conn->prepare("DELETE FROM devices WHERE name = ?")
+    }
     $sql->bind_param("s", $device_name);
     if ($sql->execute() === false) {
-      $response = "Error approving device (sql).";
+      $response = "SQL Error.";
     } else {
       $response = "OK";
     }
