@@ -39,7 +39,7 @@
         $key = bin2hex($bytes);
         $hash = password_hash($key, PASSWORD_DEFAULT);
         $sql = $conn->prepare("INSERT INTO devices VALUES (?, ?, ?)");
-        $sql->bind_param("ssi", $device_name, $hash, 0);
+        $sql->bind_param("ssi", $device_name, $hash, $a = 0);
         $sql->execute();
         $device_info = array(
           "name" => $device_name,
