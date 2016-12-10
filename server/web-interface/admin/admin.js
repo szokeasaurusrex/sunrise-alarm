@@ -17,7 +17,7 @@ app.controller("admin", function($scope) {
       };
     }
     $scope.authorized = false;
-    $scope.device_name = authkey.name;
+    $scope.device_name = $scope.authkey.name;
 
 // response object contains msg and device_info
 // device_info is array if msg "OK", if "newdevice" it is an object for one device
