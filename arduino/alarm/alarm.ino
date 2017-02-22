@@ -2,7 +2,7 @@ const int gate_pin = 5;
 String light_state;
 
 void serialEvent();
-void alarm();
+void dim(unsigned long, boolean);
 
 void dim(unsigned long duration, boolean brighten) {
   double lnb = log(pow(256.0, 1.0 / (float) duration));
