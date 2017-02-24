@@ -2,13 +2,49 @@ const int gate_pin = 5;
 String light_state;
 
 void serialEvent();
-void dim(unsigned long, boolean);
+boolean dim(unsigned long, boolean);
+void alarm(unsigned long);
+void blink(unsigned long);
 
-void dim(unsigned long duration, boolean brighten) {
+void alarm(unsigned long duration) {
+  unsigned long startMillis = millis();
+  unsigned long dimDuration = 2ul * duration / 3ul;
+  if (dim(dimDuration, true)) {
+    light_state = "alarm";
+    while (millis() - startMillis < duration) {
+      loop();
+      if (light_state != "alarm") {
+        return;
+      }
+    }
+    blink(500);
+  }
+}
+
+void blink(unsigned long interval) {
+  unsigned int previousMillis;
+  light_state = "blink";
+  while(light_state == "blink") {
+    digitalWrite(gate_pin, LOW);
+    previousMillis = millis();
+    while(millis() - previousMillis < interval) {
+      loop();
+    }
+    if (light_state != "blink") break;
+    digitalWrite(gate_pin, HIGH);
+    previousMillis = millis();
+    while(millis() - previousMillis < interval) {
+      loop();
+    }
+  }
+}
+
+// Returns false if was interrupted, otherwise returns true
+boolean dim(unsigned long duration, boolean brighten) {
   double lnb = log(pow(256.0, 1.0 / (float) duration));
   for (int i = 1; i < 256; i++) {
     if (light_state != "dimming") {
-      return;
+      return false;
     }
     unsigned long interval;
     if (brighten) {
@@ -31,12 +67,16 @@ void dim(unsigned long duration, boolean brighten) {
   } else {
     light_state = "off";
   }
+  return true;
 }
 
 void serialEvent() {
   String serial_data = Serial.readString();
   Serial.flush();
   if (serial_data == "i") {
+    Serial.println(light_state);
+  } else if (light_state == "alarm" && serial_data == "o") {
+    light_state = "on";
     Serial.println(light_state);
   } else if (light_state != "on" && serial_data == "o") {
     light_state = "dimming";
@@ -48,7 +88,8 @@ void serialEvent() {
     Serial.println(light_state);
   } else if (serial_data == "a" && light_state == "off") {
     light_state = "dimming";
-    dim(1800000, true);
+    //alarm(1800000);
+    alarm(1800000);
   }
 }
 
