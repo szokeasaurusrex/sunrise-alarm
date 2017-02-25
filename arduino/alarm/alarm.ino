@@ -27,12 +27,14 @@ void blink(unsigned long interval) {
   light_state = "blink";
   while(light_state == "blink") {
     digitalWrite(gate_pin, LOW);
+    light_brightness = 0;
     previousMillis = millis();
     while(millis() - previousMillis < interval) {
       loop();
     }
     if (light_state != "blink") break;
     digitalWrite(gate_pin, HIGH);
+    light_brightness = 255;
     previousMillis = millis();
     while(millis() - previousMillis < interval) {
       loop();
@@ -42,25 +44,30 @@ void blink(unsigned long interval) {
 
 boolean dim(long duration) {
   boolean brighten;
+  int startval;
   light_state = "dimming";
   if (duration > 0) {
     brighten = true;
+    startval = light_brightness + 1;
   } else {
     brighten = false;
     duration = -(duration);
+    startval = 256 - light_brightness;
   }
-  for (double i = 1; i < 256; i++) {
+  for (double i = startval; i < 256; i++) {
     if (light_state != "dimming") {
       return false;
     }
     unsigned long interval;
     if (brighten) {
-      analogWrite(gate_pin, i);
+      analogWrite(gate_pin, (int) i);
+      light_brightness = (int) i;
       interval = (unsigned long) round(duration * (sqrt(i / 254) - sqrt((i - 1) / 254)));
     } else {
-      double x = 256 - i;
-      analogWrite(gate_pin, (int) x - 1);
-      interval = (unsigned long) round(duration * (sqrt(x / 254) - sqrt((x - 1) / 254)));
+      double x = 255 - i;
+      analogWrite(gate_pin, (int) x);
+      light_brightness = (int) x;
+      interval = (unsigned long) round(duration * (sqrt((x + 1) / 254) - sqrt(x / 254)));
     }
     unsigned long previousMillis = millis();
     if (i < 255) {
