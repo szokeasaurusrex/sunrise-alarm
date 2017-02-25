@@ -1,15 +1,16 @@
 const int gate_pin = 5;
 String light_state;
+int light_brightness;
 
 void serialEvent();
-boolean dim(unsigned long, boolean);
+boolean dim(long);
 void alarm(unsigned long);
 void blink(unsigned long);
 
 void alarm(unsigned long duration) {
   unsigned long startMillis = millis();
   unsigned long dimDuration = 2ul * duration / 3ul;
-  if (dim(dimDuration, true)) {
+  if (dim(dimDuration)) {
     light_state = "alarm";
     while (millis() - startMillis < duration) {
       loop();
@@ -22,7 +23,7 @@ void alarm(unsigned long duration) {
 }
 
 void blink(unsigned long interval) {
-  unsigned int previousMillis;
+  unsigned long previousMillis;
   light_state = "blink";
   while(light_state == "blink") {
     digitalWrite(gate_pin, LOW);
@@ -39,21 +40,27 @@ void blink(unsigned long interval) {
   }
 }
 
-// Returns false if was interrupted, otherwise returns true
-boolean dim(unsigned long duration, boolean brighten) {
-  double lnb = log(pow(256.0, 1.0 / (float) duration));
-  for (int i = 1; i < 256; i++) {
+boolean dim(long duration) {
+  boolean brighten;
+  light_state = "dimming";
+  if (duration > 0) {
+    brighten = true;
+  } else {
+    brighten = false;
+    duration = -(duration);
+  }
+  for (double i = 1; i < 256; i++) {
     if (light_state != "dimming") {
       return false;
     }
     unsigned long interval;
     if (brighten) {
       analogWrite(gate_pin, i);
-      interval = (unsigned long) round(log(((float) i + 1) / (float) i) / lnb);
+      interval = (unsigned long) round(duration * (sqrt(i / 254) - sqrt((i - 1) / 254)));
     } else {
-      int x = 256 - i;
-      analogWrite(gate_pin, x - 1);
-      interval = (unsigned long) round(log((float) x / ((float) x - 1)) / lnb);
+      double x = 256 - i;
+      analogWrite(gate_pin, (int) x - 1);
+      interval = (unsigned long) round(duration * (sqrt(x / 254) - sqrt((x - 1) / 254)));
     }
     unsigned long previousMillis = millis();
     if (i < 255) {
@@ -67,29 +74,20 @@ boolean dim(unsigned long duration, boolean brighten) {
   } else {
     light_state = "off";
   }
+  Serial.println(light_state);
   return true;
 }
 
 void serialEvent() {
   String serial_data = Serial.readString();
+  long serial_num = serial_data.toInt();
   Serial.flush();
   if (serial_data == "i") {
     Serial.println(light_state);
-  } else if (light_state == "alarm" && serial_data == "o") {
-    light_state = "on";
-    Serial.println(light_state);
-  } else if (light_state != "on" && serial_data == "o") {
-    light_state = "dimming";
-    dim(500, true);
-    Serial.println(light_state);
-  } else if (serial_data == "o") {
-    light_state = "dimming";
-    dim(500, false);
-    Serial.println(light_state);
-  } else if (serial_data == "a" && light_state == "off") {
-    light_state = "dimming";
-    //alarm(1800000);
-    alarm(1800000);
+  } else if (serial_num >= 300000l) {
+    alarm(serial_num);
+  } else if (serial_num != 0){
+    dim(serial_num);
   }
 }
 
@@ -97,6 +95,7 @@ void setup() {
   pinMode(gate_pin, OUTPUT);
   analogWrite(gate_pin, 0);
   light_state = "off";
+  light_brightness = 0;
   Serial.begin(9600);
 }
 
