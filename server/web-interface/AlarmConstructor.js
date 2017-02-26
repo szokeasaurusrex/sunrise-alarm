@@ -52,6 +52,7 @@ function Alarm(hour, minute, days, active) {
     this.editing = true;
   };
   this.saveEdits = function() {
+    console.log(this.time);
     var hhmmss = this.time.split(":");
     this.hour = parseInt(hhmmss[0]);
     this.minute = parseInt(hhmmss[1]);
