@@ -17,7 +17,7 @@
   $access_key = $_POST;
 
   if (authenticate($conn, $access_key) > 0) {
-    echo shell_exec("/home/dani/sunrise-alarm/server/python/getState.py");
+    echo shell_exec("/home/dani/sunrise-alarm/server/python/sendrecieve.py i");
   } else {
     echo "unauthorized";
   }

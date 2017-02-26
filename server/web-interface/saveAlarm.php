@@ -61,7 +61,7 @@
       }
     }
     exec("crontab -r");
-    $alarm_path = "/var/www/scripts/alarm.py";
+    $alarm_path = "/home/dani/sunrise-alarm/server/python/send.py";
     $sql = "SELECT * FROM alarms";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -78,7 +78,7 @@
               $days_string .= ",";
             }
           }
-          $crontab .= "$row[start_minute] $row[start_hour] * * $days_string $alarm_path" . PHP_EOL;
+          $crontab .= "$row[start_minute] $row[start_hour] * * $days_string $alarm_path 1800000" . PHP_EOL;
         }
       }
       file_put_contents("/tmp/crontab", $crontab);

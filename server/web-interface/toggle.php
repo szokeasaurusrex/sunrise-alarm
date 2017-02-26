@@ -17,17 +17,16 @@
   $access_key = $_POST["authkey"];
 
   if (authenticate($conn, $access_key) > 0) {
-    $new_status = $_POST["new_status"];
-    $light_status = exec("/home/dani/sunrise-alarm/server/python/toggle.py");
-    $i = 0;
-    $response = "OK";
-    while (strpos($light_status, $new_status) === false) {
-      if ($i > 2) {
-        $response = "Could not toggle light.";
-        break;
-      }
-      $light_status = exec("/home/dani/sunrise-alarm/server/python/toggle.py");
-      $i += 1;
+  $new_status = $_POST["new_status"];
+    if ($new_status == "on") {
+      $light_status = exec("/home/dani/sunrise-alarm/server/python/sendrecieve.py 500");
+    } else {
+      $light_status = exec("/home/dani/sunrise-alarm/server/python/sendrecieve.py -500");
+    }
+    if ($new_status == $light_status) {
+      $response = "OK";
+    } else {
+      $response = "Could not toggle";
     }
   } else {
     $response = "unauthorized";
