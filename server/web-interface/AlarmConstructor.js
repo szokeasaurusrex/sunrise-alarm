@@ -52,9 +52,8 @@ function Alarm(hour, minute, days, active) {
     this.editing = true;
   };
   this.saveEdits = function() {
-    var hhmmss = this.time.toTimeString().split(":");
-    this.hour = parseInt(hhmmss[0]);
-    this.minute = parseInt(hhmmss[1]);
+    this.hour = this.time.getHours();
+    this.minute = this.time.getMinutes();
     this.updateDays();
     if (isNaN(this.hour) || this.hour < 0 || this.hour > 23) {
       alert("Error. The alarm hour must be a number between 0 and 23.");
