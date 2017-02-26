@@ -3,6 +3,7 @@ function Alarm(hour, minute, days, active) {
   this.minute = minute;
   this.days = days;
   this.active = active;
+  this.time = "";
   this.editing = false;
 }
 (function() {
@@ -47,12 +48,13 @@ function Alarm(hour, minute, days, active) {
       minute: this.minute,
       days: this.days
     };
+    this.time = this.hour + ":" + this.minute + ":00";
     this.editing = true;
-    console.log(this);
   };
   this.saveEdits = function() {
-    this.hour = parseInt(this.hour);
-    this.minute = parseInt(this.minute);
+    var hhmmss = this.time.split(":");
+    this.hour = parseInt(hhmmss[0]);
+    this.minute = parseInt(hhmmss[1]);
     this.updateDays();
     if (isNaN(this.hour) || this.hour < 0 || this.hour > 23) {
       alert("Error. The alarm hour must be a number between 0 and 23.");
