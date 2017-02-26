@@ -3,7 +3,9 @@ function Alarm(hour, minute, days, active) {
   this.minute = minute;
   this.days = days;
   this.active = active;
-  this.time = "";
+  this.time = new Date();
+  this.time.setHours(this.hour);
+  this.time.setMinutes(this.minute);
   this.editing = false;
 }
 (function() {
