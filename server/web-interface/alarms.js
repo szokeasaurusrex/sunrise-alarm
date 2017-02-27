@@ -1,4 +1,11 @@
 app.controller("alarm-cont", function($scope) {
+  function sortAlarms(a, b) {
+    if (a.hour != b.hour) {
+      return a.hour - b.hour;
+    } else {
+      return a.minute - b.minute;
+    }
+  }
   function getAlarms() {
     $.post("getAlarms.php", authkey, function(alarm_info) {
       $scope.alarms = [];
@@ -6,13 +13,7 @@ app.controller("alarm-cont", function($scope) {
         var alarm = alarm_info[i];
         $scope.alarms[i] = new Alarm(alarm.hour, alarm.minute, alarm.days, alarm.active);
       }
-      $scope.alarms.sort(function(a, b) {
-        if (a.hour != b.hour) {
-          return a.hour - b.hour;
-        } else {
-          return a.minute - b.minute;
-        }
-      });
+      $scope.alarms.sort(sortAlarms);
       $scope.$apply();
     }, "json");
   }
@@ -66,6 +67,7 @@ app.controller("alarm-cont", function($scope) {
   $scope.addAlarm = function() {
     var alarm_id = $scope.alarms.push(new Alarm(0, 0, [], true)) - 1;
     $scope.alarms[alarm_id].edit();
+    $scope.alarms.sort(sortAlarms);
     $scope.$apply();
   };
   $scope.deleteAlarm = function(alarm) {
@@ -73,6 +75,10 @@ app.controller("alarm-cont", function($scope) {
       alarm = alarm.delete();
       $scope.alarms.splice($scope.alarms.indexOf(alarm), 1);
     }
+  };
+  $scope.saveEdits = function(alarm) {
+    alarm.saveEdits();
+    $scope.alarms.sort(sortAlarms);
   };
   getAlarms();
 });
