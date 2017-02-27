@@ -67,7 +67,6 @@ app.controller("alarm-cont", function($scope) {
   $scope.addAlarm = function() {
     var alarm_id = $scope.alarms.push(new Alarm(0, 0, [], true)) - 1;
     $scope.alarms[alarm_id].edit();
-    $scope.alarms.sort(sortAlarms);
     $scope.$apply();
   };
   $scope.deleteAlarm = function(alarm) {
