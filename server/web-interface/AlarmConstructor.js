@@ -54,10 +54,12 @@ function Alarm(hour, minute, days, active) {
     this.editing = true;
   };
   this.saveEdits = function() {
-    console.log(this.time.getHours());
-    if (this.hour != this.old_alarm.hour || this.minute != this.old_alarm.minute) {
+    try {
       this.hour = this.time.getHours();
       this.minute = this.time.getMinutes();
+    } catch (err) {
+      this.hour = this.old_alarm.hour;
+      this.minute = this.old_alarm.minute;
     }
     this.updateDays();
     if (isNaN(this.hour) || this.hour < 0 || this.hour > 23) {
