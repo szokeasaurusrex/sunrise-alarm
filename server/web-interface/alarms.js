@@ -6,6 +6,13 @@ app.controller("alarm-cont", function($scope) {
         var alarm = alarm_info[i];
         $scope.alarms[i] = new Alarm(alarm.hour, alarm.minute, alarm.days, alarm.active);
       }
+      $scope.alarms.sort(function(a, b) {
+        if (a.hour != b.hour) {
+          return a.hour - b.hour;
+        } else {
+          return a.minute - b.minute;
+        }
+      });
       $scope.$apply();
     }, "json");
   }
