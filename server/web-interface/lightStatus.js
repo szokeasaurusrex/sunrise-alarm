@@ -11,8 +11,13 @@ app.controller("lightStatus", function($scope) {
   $scope.toggle = function() {
     if ($scope.status_confirmed) {
       $scope.status_confirmed = false;
+      if ($scope.btn_action == "on") {
+        var action = 500;
+      } else {
+        var action = -500;
+      }
       var data = {
-        new_status: $scope.btn_action,
+        action: action,
         authkey: authkey
       }
       $.post("toggle.php", data, function(response) {
