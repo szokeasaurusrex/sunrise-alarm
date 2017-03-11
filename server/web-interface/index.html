@@ -30,20 +30,22 @@
   <body>
     <div class="jumbotron" ng-controller="lightStatus">
       <div class="container">
-        <div class="col-sm-8">
-          <h1>Light {{ status }}</h1>
-        </div>
-        <div class="col-sm-4">
-          <div class="row">
-            <button class="btn btn-lg btn-block btn-primary" ng-class="{disabled: !(status_confirmed)}" ng-click="toggle()">
-              <h1>Turn {{ btn_action }}</h1>
-            </button>
+        <div class="row">
+          <div class="col-sm-8">
+            <h1>Light {{ status }}</h1>
           </div>
-          <br />
-          <div class="row">
-            <button class="btn btn-block" ng-class="{disabled: !(status_confirmed)}" ng-click="toggle(-90000, 'dimming')">
-              <h3>Delay off</h3>
-            </button>
+          <div class="col-sm-4">
+            <div class="row">
+              <button class="btn btn-lg btn-block btn-primary" ng-class="{disabled: !(status_confirmed)}" ng-click="toggle()">
+                <h1>Turn {{ btn_action }}</h1>
+              </button>
+            </div>
+            <br />
+            <div class="row">
+              <button class="btn btn-block" ng-show="status == 'on' && status_confirmed" ng-click="toggle(-90000, 'dimming')">
+                <h3>Delay off</h3>
+              </button>
+            </div>
           </div>
         </div>
       </div>
