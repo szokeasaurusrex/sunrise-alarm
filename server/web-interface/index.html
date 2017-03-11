@@ -42,7 +42,7 @@
             </div>
             <br />
             <div class="row">
-              <button class="btn btn-block" ng-show="status == 'on' && status_confirmed" ng-click="toggle(-90000, 'dimming')">
+              <button class="btn btn-block" ng-show="status.substring(0,2) == 'on' && status_confirmed" ng-click="toggle(-90000, 'dimming')">
                 <h3>Delay off</h3>
               </button>
             </div>
