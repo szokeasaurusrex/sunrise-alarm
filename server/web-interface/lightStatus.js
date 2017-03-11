@@ -8,13 +8,18 @@ app.controller("lightStatus", function($scope) {
       $scope.btn_action = "on";
     }
   };
-  $scope.toggle = function() {
+  $scope.toggle = function(action) {
     if ($scope.status_confirmed) {
-      $scope.status_confirmed = false;
-      if ($scope.btn_action == "on") {
-        var action = 500;
+      if (!(action)) {
+        $scope.status_confirmed = false;
+        if ($scope.btn_action == "on") {
+          action = 500;
+        } else {
+          action = -500;
+        }
+        var newstatus = $scope.btn_action;
       } else {
-        var action = -500;
+        var newstatus = $scope.status;
       }
       var data = {
         action: action,
@@ -22,7 +27,7 @@ app.controller("lightStatus", function($scope) {
       }
       $.post("toggle.php", data, function(response) {
         if (response == "OK") {
-          $scope.status = $scope.btn_action;
+          $scope.status = newstatus;
           $scope.updateButton();
           $scope.status_confirmed = true;
           $scope.$apply();
