@@ -34,9 +34,13 @@
           <h1>Light {{ status }}</h1>
         </div>
         <div class="col-sm-4">
-          <button class="btn btn-lg btn-block" ng-class="{disabled: !(status_confirmed)}" ng-click="toggle()">
-            <h1>Turn {{ btn_action }}</h1>
-          </button>
+        <button class="btn btn-lg btn-block btn-primary" ng-class="{disabled: !(status_confirmed)}" ng-click="toggle()">
+          <h1>Turn {{ btn_action }}</h1>
+        </button>
+        <br />
+        <button class="btn btn-block" ng-show="status.substring(0,2) == 'on' && status_confirmed" ng-click="toggle(-90000, 'dimming')">
+          <h3>Delay off</h3>
+        </button>
         </div>
       </div>
     </div>

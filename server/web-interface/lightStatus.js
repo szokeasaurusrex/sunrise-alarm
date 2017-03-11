@@ -8,16 +8,24 @@ app.controller("lightStatus", function($scope) {
       $scope.btn_action = "on";
     }
   };
-  $scope.toggle = function() {
+  $scope.toggle = function(action, newstatus) {
     if ($scope.status_confirmed) {
       $scope.status_confirmed = false;
+      if (!(action && newstatus)) {
+        newstatus = $scope.btn_action
+        if (newstatus == "on") {
+          action = 500;
+        } else {
+          action = -500;
+        }
+      }
       var data = {
-        new_status: $scope.btn_action,
+        action: action,
         authkey: authkey
       }
       $.post("toggle.php", data, function(response) {
         if (response == "OK") {
-          $scope.status = $scope.btn_action;
+          $scope.status = newstatus;
           $scope.updateButton();
           $scope.status_confirmed = true;
           $scope.$apply();
