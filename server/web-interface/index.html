@@ -48,9 +48,9 @@
       <div class="container col-md-6" ng-repeat="alarm in alarms">
         <div class="well">
           <div class="container" ng-hide="alarm.editing">
-            <h2><span class="glyphicon glyphicon-time" aria-hidden="true"></span>{{ stringifyTime(alarm.hour, alarm.minute) }}</h2>
+            <h2><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{ stringifyTime(alarm.hour, alarm.minute) }}</h2>
             <p>
-              <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>{{ stringifyDays(alarm.days) }}
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{ stringifyDays(alarm.days) }}
             </p>
             <button type="button" class="btn btn-primary btn-sm" ng-click="alarm.edit()">
               <h4>Edit alarm</h4>
