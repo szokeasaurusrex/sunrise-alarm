@@ -47,5 +47,11 @@ app.controller("lightStatus", function($scope) {
       }
     }, "text");
   };
+  $scope.refresh = function () {
+    if ($scope.status_confirmed) {
+      $scope.status_confirmed = false;
+      $scope.getStatus();
+    }
+  }
   $scope.getStatus();
 });

@@ -31,6 +31,9 @@
     <div class="jumbotron" ng-controller="lightStatus">
       <div class="container">
         <div class="col-sm-8">
+          <button class="btn btn-lg" ng-class="{disabled: !(status_confirmed)}" ng-click="refresh()">
+            <h1><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></h1>
+          </button>
           <h1>Light {{ status }}</h1>
         </div>
         <div class="col-sm-4">
