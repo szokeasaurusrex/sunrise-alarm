@@ -52,9 +52,9 @@
         $days = serialize($alarm["days"]);
         $active = (int) $alarm["active"];
         $sql = $conn->prepare("INSERT INTO alarms
-          VALUES (?, ?, ?, ?, ?, ?)");
-        $sql->bind_param("iiiisi", $alarm["hour"], $alarm["minute"], $alarm["start_hour"],
-          $alarm["start_minute"], $days, $active);
+          VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $sql->bind_param("iiiisii", $alarm["hour"], $alarm["minute"], $alarm["start_hour"],
+          $alarm["start_minute"], $days, $active, $alarm["dimtime"]);
         if ($sql->execute() === false) {
           $success = "Error58 " . $conn->error . "\n" . $sql;
         }
@@ -78,7 +78,8 @@
               $days_string .= ",";
             }
           }
-          $crontab .= "$row[start_minute] $row[start_hour] * * $days_string $alarm_path 1800000" . PHP_EOL;
+          $dimtime_millis = $row["dimtime"] * 60000;
+          $crontab .= "$row[start_minute] $row[start_hour] * * $days_string $alarm_path $dimtime_millis" . PHP_EOL;
         }
       }
       file_put_contents("/tmp/crontab", $crontab);

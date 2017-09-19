@@ -11,7 +11,7 @@ app.controller("alarm-cont", function($scope) {
       $scope.alarms = [];
       for (var i = 0; i < alarm_info.length; i++) {
         var alarm = alarm_info[i];
-        $scope.alarms[i] = new Alarm(alarm.hour, alarm.minute, alarm.days, alarm.active);
+        $scope.alarms[i] = new Alarm(alarm.hour, alarm.minute, alarm.days, alarm.active, alarm.dimtime);
       }
       $scope.alarms.sort(sortAlarms);
       $scope.$apply();
@@ -65,7 +65,7 @@ app.controller("alarm-cont", function($scope) {
     return day_string;
   };
   $scope.addAlarm = function() {
-    var alarm_id = $scope.alarms.push(new Alarm(0, 0, [], true)) - 1;
+    var alarm_id = $scope.alarms.push(new Alarm(0, 0, [], true, 20)) - 1;
     $scope.alarms[alarm_id].edit();
     $scope.$apply();
   };

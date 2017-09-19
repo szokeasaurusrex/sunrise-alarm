@@ -54,6 +54,7 @@
             <p>
               {{ stringifyDays(alarm.days) }}
             </p>
+            <h5><strong>{{ alarm.dimtime }} minute sunrise</strong></h5>
             <button type="button" class="btn btn-primary btn-sm" ng-click="alarm.edit()">
               <h4>Edit alarm</h4>
             </button>
@@ -68,8 +69,14 @@
             <form role="form">
               <div class="form-group">
                 <div class="row">
-                  <label for="time"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Alarm time</label>
-                  <input class="form-control" ng-model="alarm.time" id="time" type="time">
+                  <div class="col-xs-8">
+                    <label for="time"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Alarm time</label>
+                    <input class="form-control" ng-model="alarm.time" id="time" type="time">
+                  </div>
+                  <div class="col-xs-4">
+                    <label for="dimtime">Dim Time</label>
+                    <input class="form-control" ng-model="alarm.dimtime" id="dimtime" type="number" value="{{alarm.dimtime}}">
+                  </div>
                 </div>
               </div>
               <div class="form-group container-fluid">
