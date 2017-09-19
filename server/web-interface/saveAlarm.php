@@ -53,7 +53,7 @@
         $active = (int) $alarm["active"];
         $sql = $conn->prepare("INSERT INTO alarms
           VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $sql->bind_param("iiiisi", $alarm["hour"], $alarm["minute"], $alarm["start_hour"],
+        $sql->bind_param("iiiisii", $alarm["hour"], $alarm["minute"], $alarm["start_hour"],
           $alarm["start_minute"], $days, $active, $alarm["dimtime"]);
         if ($sql->execute() === false) {
           $success = "Error58 " . $conn->error . "\n" . $sql;
