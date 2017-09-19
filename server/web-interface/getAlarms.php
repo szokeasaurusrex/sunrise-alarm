@@ -33,7 +33,8 @@
           "minute" => $row["minute"],
           "hour" => $row["hour"],
           "days" => $days,
-          "active" => $active
+          "active" => $active,
+          "dimtime" => $row["dimtime"];
         );
       }
     }
