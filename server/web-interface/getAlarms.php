@@ -34,7 +34,11 @@
           "hour" => $row["hour"],
           "days" => $days,
           "active" => $active,
+<<<<<<< HEAD
           "dimtime" => $row["dimtime"]
+=======
+          "dimtime" => $row["dimtime"];
+>>>>>>> 76aa390079d085f3597f2e25854ea92e48f13dab
         );
       }
     }
