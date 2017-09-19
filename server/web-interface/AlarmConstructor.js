@@ -1,8 +1,9 @@
-function Alarm(hour, minute, days, active) {
+function Alarm(hour, minute, days, active, dimtime) {
   this.hour = hour;
   this.minute = minute;
   this.days = days;
   this.active = active;
+  this.dimtime = dimtime; // amount to dim in minutes
   this.time = new Date(0);
   this.time.setHours(this.hour);
   this.time.setMinutes(this.minute);
@@ -15,11 +16,11 @@ function Alarm(hour, minute, days, active) {
     this.pushChanges("toggle");
   };
   this.updateStartTime = function() {
-    if (this.minute < 30) {
-      this.start_minute = this.minute + 30;
+    if (this.minute < this.dimtime) {
+      this.start_minute = this.minute + 60 - dimtime;
       this.start_hour = (this.hour === 0) ? 23 : this.hour - 1;
     } else {
-      this.start_minute = this.minute - 30;
+      this.start_minute = this.minute - dimtime;
       this.start_hour = this.hour;
     }
   };
@@ -68,6 +69,8 @@ function Alarm(hour, minute, days, active) {
       alert("Error. The alarm minute must be a number between 0 and 59.");
     } else if (this.days == []) {
       alert("Error. No days were selected.");
+    } else if (this.dimtime < 0 || this.dimtime > 60 || this.dimtime !== parseInt(this.dimtime, 10)) {
+      alert("Error. Dimtime must be an integer between 0 and 60.");
     } else {
       this.editing = false;
       this.active = true;
