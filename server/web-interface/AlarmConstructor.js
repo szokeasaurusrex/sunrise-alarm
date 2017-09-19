@@ -17,10 +17,10 @@ function Alarm(hour, minute, days, active, dimtime) {
   };
   this.updateStartTime = function() {
     if (this.minute < this.dimtime) {
-      this.start_minute = this.minute + 60 - dimtime;
+      this.start_minute = this.minute + 60 - this.dimtime;
       this.start_hour = (this.hour === 0) ? 23 : this.hour - 1;
     } else {
-      this.start_minute = this.minute - dimtime;
+      this.start_minute = this.minute - this.dimtime;
       this.start_hour = this.hour;
     }
   };
