@@ -3,7 +3,7 @@ function Alarm(hour, minute, days, active, dimtime) {
   this.minute = minute;
   this.days = days;
   this.active = active;
-  this.dimtime = dimtime; // amount to dim in minutes
+  this.dimtime = parseInt(dimtime); // amount to dim in minutes
   this.time = new Date(0);
   this.time.setHours(this.hour);
   this.time.setMinutes(this.minute);
