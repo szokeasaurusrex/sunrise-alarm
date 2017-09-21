@@ -3,7 +3,7 @@ function Alarm(hour, minute, days, active, dimtime) {
   this.minute = minute;
   this.days = days;
   this.active = active;
-  this.dimtime = dimtime; // amount to dim in minutes
+  this.dimtime = parseInt(dimtime); // amount to dim in minutes
   this.time = new Date(0);
   this.time.setHours(this.hour);
   this.time.setMinutes(this.minute);
@@ -63,11 +63,7 @@ function Alarm(hour, minute, days, active, dimtime) {
       this.minute = this.old_alarm.minute;
     }
     this.updateDays();
-    if (isNaN(this.hour) || this.hour < 0 || this.hour > 23) {
-      alert("Error. The alarm hour must be a number between 0 and 23.");
-    } else if (isNaN(this.minute) || this.minute < 0 || this.minute > 59) {
-      alert("Error. The alarm minute must be a number between 0 and 59.");
-    } else if (this.days == []) {
+    if (this.days == []) {
       alert("Error. No days were selected.");
     } else if (this.dimtime < 0 || this.dimtime > 60 || this.dimtime !== parseInt(this.dimtime, 10)) {
       alert("Error. Dimtime must be an integer between 0 and 60.");
