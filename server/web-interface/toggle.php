@@ -14,7 +14,7 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $path = "/home/dani/sunrise-alarm/server/python/send.py";
+  $path = "/home/pi/web/sunrise-alarm/server/python/send.py";
   $access_key = $_POST["authkey"];
 
   if (authenticate($conn, $access_key) > 0) {
