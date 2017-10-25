@@ -14,11 +14,12 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
+  $path = "/home/dani/sunrise-alarm/server/python/send.py";
   $access_key = $_POST["authkey"];
 
   if (authenticate($conn, $access_key) > 0) {
   $action = intval($_POST["action"]);
-    exec("/home/dani/sunrise-alarm/server/python/send.py $action");
+    exec("$path $action");
     $response = "OK";
   } else {
     $response = "unauthorized";
