@@ -14,7 +14,7 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $path = "/home/pi/web/sunrise-alarm/server/python/sendrecieve.py"
+  $path = "/home/pi/web/sunrise-alarm/server/python/sendrecieve.py";
 
   $access_key = $_POST;
 
